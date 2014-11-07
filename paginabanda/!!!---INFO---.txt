@@ -1,0 +1,30 @@
+http://sqlitestudio.pl/
+
+
+http://www.degraeve.com/color-palette/
+http://tympanus.net/codrops/
+
+http://projects.lukehaas.me/css-loaders/
+
+http://www.reddit.com/r/web_design/comments/2bgnq1/ #transitions!!!!!!!
+
+
+https://github.com/Valve/fingerprintjs
+
+
+http://stackoverflow.com/questions/18622508/bootstrap-3-and-youtube-in-modal
+============================
+TODO
+----------
+!Fonts
+!fotos modal tamaño
+
+
+busqueda en admin (para moderar comentarios)
+menu en mobile
+popups en mobile
+
+
+
+
+templates in sections
