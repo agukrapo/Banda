@@ -1,10 +1,10 @@
 Django==1.6.5
 Pillow==2.3.0
 dj-database-url==0.3.0
-django-singletons==0.1.6-ionata4
 django-summernote==0.5.13
 gunicorn==19.1.1
 python-dateutil==1.5
 simplejson==3.3.1
 sorl-thumbnail==11.12.1b
 whitenoise==1.0.3
+-e git+https://github.com/ionata/django-singletons.git@592c8de4c4921cd5690244ec03387676398aae76#egg=django_singletons-master
