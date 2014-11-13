@@ -36,7 +36,9 @@
 
 </head>
 <body>
-  <div id="modal"></div>
+  <div id="loader">
+  	<img src="/static/img/load.gif" class="img-responsive center" alt="Cargando...">
+  </div>
 
   <header id="navigation" class="navbar-fixed-top">
     <nav class="container">
@@ -54,7 +56,7 @@
   </header>
 
   <section id="inicio">
-    <img id="logo" src="" class="img-responsive" alt="Nenes Bian">
+    <img id="logo" src="" class="img-responsive center" alt="Nenes Bian">
   </section>
 
   <section id="nosotros"></section>
@@ -221,7 +223,7 @@
 
         <div class="col-md-3">
           <a class="thumbnail" href="#" data-toggle="modal" data-target="#modal-foto-<%=i%>">
-            <img class="img-responsive" src="<%=foto.get('thumbnail')%>">
+            <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=foto.get('thumbnail')%>">
           </a>
         </div>
 
@@ -229,7 +231,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-body">
-                <img src="<%=foto.get('url')%>" class="img-responsive img-rounded">
+                <img src="/static/img/img_load.gif" class="img-responsive img-rounded" data="<%=foto.get('url')%>">
               </div>
               <%if (foto.get('descripcion').length > 0) {%>
               <div class="modal-footer">
@@ -312,12 +314,12 @@
             <form>
               <div class="form-group autor">
                 <label class="control-label h2" for="autor-field">Autor</label>
-                <input id="autor-field" type="text" class="form-control" required></input>
+                <input id="autor-field" type="text" class="form-control"></input>
                 <span class="help-block"></span>
               </div>
               <div class="form-group comentario">
                 <label class="control-label h2" for="comentario-field">Comentario</label>
-                <textarea id="comentario-field" rows="3" class="form-control" required></textarea>
+                <textarea id="comentario-field" rows="3" class="form-control"></textarea>
                 <span class="help-block"></span>
               </div>
               <button id="submit-comentario-form" type="submit" class="btn btn-default">Agregar comentario</button>
@@ -371,6 +373,7 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+  <script src="//cdn.jsdelivr.net/echo/1.2.0/echo.min.js"></script>
 
   <script src="{% static 'js/banda.js' %}"></script>
 

@@ -98,13 +98,25 @@ Banda.Utils = {
 
     Banda.Utils.setupNavigation();
     Banda.Utils.resize();
-    Banda.Utils.hideModal();
+    //Banda.Utils.hideLoader();
   },
-  hideModal: function() {
-    $('#modal').delay(250).fadeOut('slow');
+  showLoader: function() {
+    $('#loader').show();
+  },
+  hideLoader: function() {
+    $('#loader').hide();
   },
   setFondo: function(section) {
-    $('body').backstretch(Banda.Instances.fondos.get(section));
+    var src = Banda.Instances.fondos.get(section)
+    var fondo = new Image();
+    fondo.src = src;
+    
+    fondo.onload = Banda.Utils.hideLoader;
+    if (fondo.complete) {
+      Banda.Utils.hideLoader();
+    }
+    
+    $('body').backstretch(src);
   },
   showErrorMsg: function(model, response, options) {
     $('#error-msg-modal').modal();
@@ -130,7 +142,7 @@ Banda.Models.Fondos = Backbone.Model.extend({
 
 Banda.Views.InicioView = Backbone.View.extend({
   render: function() {
-    $('#logo').attr('src', Banda.Instances.fondos.get('logo')).css('position', 'absolute');
+    $('#logo').attr('src', Banda.Instances.fondos.get('logo'));
     return this;
   },
   initialize: function() {
@@ -268,11 +280,13 @@ Banda.Views.PagedView = Backbone.View.extend({
       success: function(collection) {
         collection.map(that.mapAfterFetch);
         that.$el.html(that.template({ collection: collection, _: _ }));
+        that.afterSuccess();
       },
       error: Banda.Utils.showErrorMsg
     });
     return this;
   },
+  afterSuccess: function() {},
   nextPage: function() {
     this.collection.next();
     this.render();
@@ -320,6 +334,9 @@ Banda.Views.FotosView = Banda.Views.PagedView.extend({
   template: Banda.Utils.template('fotos-template'),
   initializeCollection: function() {
     this.collection = new Banda.Collections.Fotos();
+  },
+  afterSuccess:function() {
+    console.log(this.collection);
   }
 });
 
@@ -485,6 +502,7 @@ Banda.Router = Backbone.Router.extend({
       window.location = /maintenance/;
     } else {
       if (Banda.Instances.secciones.get(name)) {
+        Banda.Utils.showLoader();
         if (Banda.Instances[name + 'View'] === undefined) {
           Banda.Instances[name + 'View'] = new Banda.Views[name.capitalize() + 'View']();
         } else if (alwaysRender) {

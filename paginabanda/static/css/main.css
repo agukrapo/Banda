@@ -3,14 +3,14 @@ body {
 
 }
 
-#modal {
+#loader {
   position: fixed;
   z-index: 2000;
   top: 0px;
   left: 0px;
   height: 100%;
   width: 100%;
-  background-color: #333;
+  background-color: #333333;
 }
 
 #navigation ul {
@@ -22,11 +22,7 @@ body {
 }
 
 #logo {
-	max-width: 90%;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  max-width: 90%;
 }
 
 section {
@@ -38,13 +34,6 @@ section {
 
 .container {
 	height: 100%;
-}
-
-.center-block {
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-	vertical-align: middle;
 }
 
 .help-block {
@@ -61,6 +50,13 @@ section {
 
 .cancion {
   margin-bottom: 0px;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 /**********************************************/
