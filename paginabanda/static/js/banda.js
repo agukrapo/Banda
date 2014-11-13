@@ -219,6 +219,7 @@ Banda.Views.MusicaView = Backbone.View.extend({
     musica.fetch({
       success: function(musica) {
         that.$el.html(that.template({ musica: musica.models, _: _ }));
+        echo.init();
       },
       error: Banda.Utils.showErrorMsg
     });
@@ -317,6 +318,9 @@ Banda.Views.VideosView = Banda.Views.PagedView.extend({
   },
   initializeCollection: function() {
     this.collection = new Banda.Collections.Videos();
+  },
+  afterSuccess:function() {
+    echo.init();
   }
 });
 
@@ -336,7 +340,7 @@ Banda.Views.FotosView = Banda.Views.PagedView.extend({
     this.collection = new Banda.Collections.Fotos();
   },
   afterSuccess:function() {
-    console.log(this.collection);
+    echo.init();
   }
 });
 

@@ -108,7 +108,7 @@
       <div class="row">
         <div class="col-md-6">
           <div class="thumbnail">
-            <img class="img-responsive" src="<%=album.get('tapa')%>" alt="Tapa de <%=album.get('nombre')%>">
+            <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=album.get('tapa')%>" alt="Tapa de <%=album.get('nombre')%>">
           </div>
         </div>
         <div class="col-md-6">
@@ -163,7 +163,7 @@
 
         <div class="col-md-4">
           <a class="thumbnail" href="#" data-toggle="modal" data-target="#modal-video-<%=i%>">
-            <img class="img-responsive" src="<%=video.get('thumbnail')%>" alt="<%=video.get('nombre')%>" title="<%=video.get('nombre')%>">
+            <img src="/static/img/img_load.gif" class="img-responsive" alt="<%=video.get('nombre')%>" data-echo="<%=video.get('thumbnail')%>">
           </a>
         </div>
 
@@ -231,7 +231,7 @@
           <div class="modal-dialog">
             <div class="modal-content">
               <div class="modal-body">
-                <img src="/static/img/img_load.gif" class="img-responsive img-rounded" data="<%=foto.get('url')%>">
+                <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=foto.get('url')%>">
               </div>
               <%if (foto.get('descripcion').length > 0) {%>
               <div class="modal-footer">
@@ -373,8 +373,9 @@
   <script src="//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.5.2/underscore-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.0/backbone-min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
-  <script src="//cdn.jsdelivr.net/echo/1.2.0/echo.min.js"></script>
+  <!-- <script src="//cdn.jsdelivr.net/echo/1.2.0/echo.min.js"></script>-->
 
+  <script src="{% static 'js/echo.js' %}"></script>
   <script src="{% static 'js/banda.js' %}"></script>
 
   </body>
