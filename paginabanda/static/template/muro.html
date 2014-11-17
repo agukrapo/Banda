@@ -1,0 +1,39 @@
+
+<div class="container">
+  <header class="page-header">
+    <h1>Muro</h1>
+  </header>
+  <div class="row">
+    <div class="col-md-12">
+      <button id="add-comentario" class="btn btn-default">Agregar
+        comentario</button>
+    </div>
+  </div>
+
+  <% _.forEach(collection.models, function (comentario, i) { %>
+
+  <div class="row">
+    <div class="col-md-12">
+      <blockquote class="pull-right">
+        <p class="h3"><%-comentario.get('texto')%></p>
+        <small><cite><%-comentario.get('autor')%></cite></small>
+      </blockquote>
+    </div>
+  </div>
+
+  <%})%> <%if (collection.hasPrevious() || collection.hasNext()) {%>
+  <div class="row">
+    <div class="col-md-6">
+      <%if (collection.hasPrevious()) {%>
+      <button id="previous-page" class="btn btn-default pull-left">Comentarios M&aacute;s Nuevos</button>
+      <% } %>
+    </div>
+    <div class="col-md-6">
+      <%if (collection.hasNext()) {%>
+      <button id="next-page" class="btn btn-default pull-right">Comentarios M&aacute;s Viejos</button>
+      <% } %>
+    </div>
+  </div>
+  <% } %>
+
+</div>

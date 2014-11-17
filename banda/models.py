@@ -26,7 +26,7 @@ def timeToString(time):
 
 class Cancion(models.Model):
     nombre = models.CharField(max_length=100)
-    url = models.URLField(blank=True, help_text='solamente Soundcloud')
+    url = models.URLField(blank=True, help_text='Soundcloud')
     #duracion = models.TimeField()
 
     def __unicode__(self):
