@@ -1,5 +1,7 @@
 define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Backbone.Model.extend({
+  var Nosotros = Backbone.Model.extend({
     url : '/banda/nosotros/'
   });
+  
+  return new Nosotros();
 });

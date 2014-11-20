@@ -101,6 +101,5 @@ SUMMERNOTE_CONFIG = {
     'lang': 'es-ES',
 }
 
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

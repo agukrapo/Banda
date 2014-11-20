@@ -1,5 +1,44 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Backbone.Router.extend({
+define([ 'jquery',
+         'backstretch',
+         'underscore', 
+         'backbone',
+         'loader',
+         'models/fondos',
+         'models/secciones',
+         'views/inicioView'
+         ], function($, backstretch, _, Backbone, Loader, fondos, secciones, inicio) {
+
+  var setFondo = function(section) {
+    var src = fondos.get(section)
+    var fondo = new Image();
+    fondo.src = src;
+    
+    fondo.onload = Loader.hide;
+    if (fondo.complete) {
+      Loader.hide();
+    }
+    
+    $('body').backstretch(src);
+  };
+  
+  var transitionTo = function(id) {
+    var currentId = $('body').attr('currentsection');
+    
+    if (currentId !== undefined) {
+      $('body').attr('transitioningTo', id);
+      $('#' + currentId).hide();
+      $('body').removeAttr('transitioningTo');
+    }
+    
+    $('#' + id).show();
+    setFondo(id);
+    $('body').attr('currentsection', id);
+    
+    $('#navigation').find('li').removeClass('active');
+    $('a[href="#' + id + '"]').parent().addClass('active');
+  };
+  
+  var Router = Backbone.Router.extend({
     routes: {
       '': 'inicio',
       'inicio': 'inicio',
@@ -13,17 +52,19 @@ define([ 'underscore', 'backbone' ], function(_, Backbone) {
       '*default': 'inicio'
     },
     commonRoute: function(name, alwaysRender) {
-      if (!Banda.Instances.secciones.get('inicio')) {
+      if (!secciones.get('inicio')) {
         window.location = /maintenance/;
       } else {
-        if (Banda.Instances.secciones.get(name)) {
-          Banda.Utils.showLoader();
-          if (Banda.Instances[name + 'View'] === undefined) {
-            Banda.Instances[name + 'View'] = new Banda.Views[name.capitalize() + 'View']();
-          } else if (alwaysRender) {
-            Banda.Instances[name + 'View'].render();
-          }
-          Banda.Utils.transitionTo(name);
+        if (secciones.get(name)) {
+          Loader.show();
+          
+          require(['views/' + name + 'View'], function (view) {
+            if (alwaysRender) {
+              view.render();
+            }
+          });
+          
+          transitionTo(name);
         } else {
           this.inicio();
         }
@@ -54,4 +95,6 @@ define([ 'underscore', 'backbone' ], function(_, Backbone) {
       this.commonRoute('fotos');
     }
   });
+  
+  return new Router();
 });

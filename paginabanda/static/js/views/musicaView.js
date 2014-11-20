@@ -1,22 +1,29 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Backbone.View.extend({
-    collection: Banda.Collections.Musica,
+define([ 'underscore', 
+         'backbone',
+         'echo',
+         'collections/musica',
+         'text!template/musica.html'
+       ], function(_, Backbone, Echo, musica, musicaTemplate) {
+  
+  var MusicaView = Backbone.View.extend({
+    collection: musica,
     el: '#musica',
-    template: Banda.Utils.template('musica-template'),
-    render: function() {
-      var that = this;
-      var musica = new Banda.Collections.Musica();
-      musica.fetch({
-        success: function(musica) {
-          that.$el.html(that.template({ musica: musica.models, _: _ }));
-          echo.init();
-        },
-        error: Banda.Utils.showErrorMsg
-      });
-      return this;
-    },
+    template: _.template(musicaTemplate),
     initialize: function() {
       this.render();
+      return this;
+    },
+    render: function() {
+      var that = this;
+      this.collection.fetch({
+        success: function(musica) {
+          that.$el.html(that.template({ musica: musica.models, _: _ }));
+          Echo.init();
+        }
+      });
+      return this;
     }
   });
+  
+  return new MusicaView();
 });
