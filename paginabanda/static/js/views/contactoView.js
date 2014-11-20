@@ -2,7 +2,6 @@ define([ 'underscore',
          'backbone',
          'models/contacto',
          'text!template/contacto.html'
-       
        ], function(_, Backbone, contacto, contactoTemplate) {
   
   var ContactoView = Backbone.View.extend({
