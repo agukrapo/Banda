@@ -1,9 +1,11 @@
-define([ 'underscore', 'backbone', 'views/error'], function(_, Backbone, error) {
+define([ 'underscore', 'backbone' ], function(_, Backbone) {
   return Backbone.Collection.extend({
     fetch : function(options) {
       options = options || {};    
       options.error = function() {
-        error.show();
+        require(['views/error'], function (error) {
+          error.show();
+        });
       }; 
       return Backbone.Collection.prototype.fetch.call(this, options);
     }

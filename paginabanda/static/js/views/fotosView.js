@@ -1,12 +1,20 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Banda.Views.PagedView.extend({
+define([ 'underscore', 
+         'backbone',
+         'echo',
+         'bootstrap',
+         'views/pagedview',
+         'collections/fotos',
+         'text!template/fotos.html'
+       ], function(_, Backbone, Echo, Bootstrap, PagedView, fotos, fotosTemplate) {
+
+  var FotosView = PagedView.extend({
     el: '#fotos',
-    template: Banda.Utils.template('fotos-template'),
-    initializeCollection: function() {
-      this.collection = new Banda.Collections.Fotos();
-    },
+    collection: fotos,
+    template: _.template(fotosTemplate),
     afterSuccess:function() {
-      echo.init();
+      Echo.init();
     }
   });
+  
+  return new FotosView();
 });

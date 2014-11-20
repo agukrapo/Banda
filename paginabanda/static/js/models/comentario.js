@@ -1,5 +1,6 @@
-comentariodefine([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Backbone.Model.extend({
+define([ 'underscore', 'backbone', 'models/basemodel' ], function(_, Backbone, BaseModel) {
+ 
+  return BaseModel.extend({
     url: '/banda/comentario/',
     validate: function(attrs, options) {
       var errors = [];

@@ -1,30 +1,38 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Banda.Views.PagedView.extend({
+define([ 'underscore', 
+         'backbone',
+         'bootstrap',
+         'views/pagedview',
+         'collections/muro',
+         'views/comentarioform',
+         'text!template/muro.html'
+       ], function(_, Backbone, Bootstrap, PagedView, muro, comentarioForm, muroTemplate) {
+
+  var MuroView = PagedView.extend({
     el: '#muro',
-    template: Banda.Utils.template('muro-template'),
+    template: _.template(muroTemplate),
+    collection: muro,
+    form: comentarioForm,
     events: {
       'click #add-comentario': 'showForm',
       "click #next-page": "nextPage",
       "click #previous-page": "previousPage"
     },
-    initializeCollection: function() {
-      this.collection = new Banda.Collections.Muro();
-      this.form = new Banda.Views.ComentarioForm();
-    },
+    initialize: function() { },
     render: function() {
-      this.form.render();
       var that = this;
       this.collection.fetch({
         success: function(collection) {
           that.$el.html(that.template({ collection: collection, _: _ }));
-          that.$el.append(that.form.$el);
-        },
-        error: Banda.Utils.showErrorMsg
+        }
       });
       return this;
     },
     showForm: function() {
+      this.form.render();
+      this.$el.append(this.form.$el);
       this.form.showForm(this);
     },
   });
+  
+  return new MuroView();
 });

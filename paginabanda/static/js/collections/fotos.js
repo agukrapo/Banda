@@ -1,6 +1,13 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Banda.Collections.PagedCollection.extend({
-    model: Banda.Models.Foto,
+define([ 'underscore', 
+         'backbone', 
+         'models/foto',
+         'collections/pagedcollection'
+       ], function(_, Backbone, Foto, PagedCollection) {
+  
+  var Fotos = PagedCollection.extend({
+    model: Foto,
     urlPart: '/banda/fotos/'
   });
+  
+  return new Fotos();
 });

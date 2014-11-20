@@ -101,5 +101,5 @@ SUMMERNOTE_CONFIG = {
     'lang': 'es-ES',
 }
 
-if not DEBUG:
-    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+#if not DEBUG:
+    #STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'

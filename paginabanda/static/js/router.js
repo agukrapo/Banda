@@ -4,9 +4,8 @@ define([ 'jquery',
          'backbone',
          'loader',
          'models/fondos',
-         'models/secciones',
-         'views/inicioView'
-         ], function($, backstretch, _, Backbone, Loader, fondos, secciones, inicio) {
+         'models/secciones'
+         ], function($, backstretch, _, Backbone, Loader, fondos, secciones) {
 
   var setFondo = function(section) {
     var src = fondos.get(section)

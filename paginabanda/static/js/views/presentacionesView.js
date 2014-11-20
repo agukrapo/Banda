@@ -1,21 +1,26 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Backbone.View.extend({
-    collection: Banda.Collections.Presentaciones,
+define([ 'underscore', 
+         'backbone',
+         'collections/presentaciones',
+         'text!template/presentaciones.html'
+        ], function(_, Backbone, presentaciones, presentacionesTemplate) {
+  
+  var PresentationesView = Backbone.View.extend({
+    collection: presentaciones,
     el: '#presentaciones',
-    template: Banda.Utils.template('presentaciones-template'),
+    template: _.template(presentacionesTemplate),
     initialize: function() {
       this.render();
     },
     render: function() {
       var that = this;
-      var presentaciones = new Banda.Collections.Presentaciones();
-      presentaciones.fetch({
+      this.collection.fetch({
         success: function(presentaciones) {
           that.$el.html(that.template({ presentaciones: presentaciones.models, _: _ }));
-        },
-        error: Banda.Utils.showErrorMsg
+        }
       });
       return this;
     }
   });
+  
+  return new PresentationesView();
 });

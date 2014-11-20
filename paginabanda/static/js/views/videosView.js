@@ -1,18 +1,20 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Banda.Views.PagedView.extend({
+define([ 'underscore', 
+         'backbone',
+         'echo',
+         'bootstrap',
+         'views/pagedview',
+         'collections/videos',
+         'text!template/videos.html'
+       ], function(_, Backbone, Echo, Bootstrap, PagedView, videos, videosTemplate) {
+  
+  var VideosView = PagedView.extend({
     el: '#videos',
-    template: Banda.Utils.template('videos-template'),
-    mapAfterFetch: function(video) {
-      var videoId = Banda.Utils.youtubeVideoId(video.get('url'));
-      video.set('thumbnail', '//img.youtube.com/vi/' + videoId + '/0.jpg');
-      video.set('embed', '//www.youtube.com/embed/' + videoId);
-      return video;
-    },
-    initializeCollection: function() {
-      this.collection = new Banda.Collections.Videos();
-    },
+    template: _.template(videosTemplate),
+    collection: videos,
     afterSuccess:function() {
-      echo.init();
+      Echo.init();
     }
   });
+  
+  return new VideosView();
 });

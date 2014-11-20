@@ -1,27 +1,29 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Backbone.View.extend({
-    template: Banda.Utils.template('add-comentario-form'),
+define([ 'jquery',
+         'underscore', 
+         'backbone',
+         'bootstrap',
+         'models/comentario',
+         'text!template/comentarioform.html'
+       ], function($, _, Backbone, Bootstrap, Comentario, comentarioFormTemplate) {
+
+  var ComentarioForm = Backbone.View.extend({
+    template: _.template(comentarioFormTemplate),
     events: {
-      //'click #submit-comentario-form': 'submitMe',
       'submit': 'submitMe',
     },
-    initialize: function() {
-      this.model = new Banda.Models.Comentario();
-    },
     render: function() {
-      this.$el.html(this.template({ model: this.model, _: _ }));
+      this.model = new Comentario();
+      this.$el.html(this.template({ comentario: this.model, _: _ }));
+      this.hideErrors();
       return this;
     },
     submitMe: function(event) {
       event.preventDefault();
-
       this.model.set('autor', this.$('#autor-field').val());
       this.model.set('comentario', this.$('#comentario-field').val());
-
       if (this.model.isValid()) {
         this.model.save();
         this.hideForm();
-        this.view.initializeCollection();
         this.view.render();
       } else {
         this.hideErrors();
@@ -30,10 +32,10 @@ define([ 'underscore', 'backbone' ], function(_, Backbone) {
     },
     showForm: function(view) {
       this.view = view;
-      $('#add-comentario-modal').modal('show');
+      $('#comentario-modal').modal('show');
     },
     hideForm: function() {
-      $('#add-comentario-modal').modal('hide');
+      $('#comentario-modal').modal('hide');
     },
     showErrors: function() {
       _.each(this.model.validationError, function (error) {
@@ -44,4 +46,6 @@ define([ 'underscore', 'backbone' ], function(_, Backbone) {
       this.$('.form-group').removeClass('has-error').find('.help-block').hide().text('');
     }
   });
+  
+  return new ComentarioForm();
 });

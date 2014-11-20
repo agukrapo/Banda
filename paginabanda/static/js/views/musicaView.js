@@ -1,9 +1,10 @@
 define([ 'underscore', 
          'backbone',
          'echo',
+         'bootstrap',
          'collections/musica',
          'text!template/musica.html'
-       ], function(_, Backbone, Echo, musica, musicaTemplate) {
+       ], function(_, Backbone, Echo, Bootstrap, musica, musicaTemplate) {
   
   var MusicaView = Backbone.View.extend({
     collection: musica,

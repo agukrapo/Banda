@@ -1,5 +1,7 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Backbone.Collection.extend({
+define([ 'underscore', 
+         'backbone', 
+         'collections/basecollection'], function(_, Backbone, BaseCollection) {
+  return BaseCollection.extend({
     current: 1,
     total: undefined,
     urlPart: 'OVERIDE-ME',
