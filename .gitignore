@@ -27,12 +27,6 @@ pip-log.txt
 .mr.developer.cfg
  
 # Django files
-include
-lib
-local
-man
-share
-Scripts
 .Python
 *.pyc
 *~

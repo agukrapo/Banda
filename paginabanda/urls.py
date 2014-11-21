@@ -14,9 +14,5 @@ urlpatterns = patterns('',
     url(r'^banda/', include('banda.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^summernote/', include('django_summernote.urls')),
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-if not settings.DEBUG:
-    urlpatterns += patterns('',
-        (r'^static/(?P<path>.*)$', 'django.views.static.serve', {'document_root': settings.STATIC_ROOT}),
-    )
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

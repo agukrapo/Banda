@@ -97,7 +97,6 @@ INSTALLED_APPS += ('django_summernote', )
 SUMMERNOTE_CONFIG = {
     'width': '100%',
     'height': '500',
-
     'lang': 'es-ES',
 }
 
