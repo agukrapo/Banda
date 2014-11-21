@@ -29,7 +29,7 @@ define([ 'jquery',
 
   return {
     begin: function() {
-      console.log('banda begun');
+//      console.log('banda begun');
     }
   };
 });

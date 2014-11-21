@@ -20,3 +20,9 @@ require.config({
 require([ 'banda' ], function(Banda) {
   Banda.begin();
 });
+
+requirejs.onError = function (err) {
+  require(['views/error'], function (error) {
+    error.show();
+  });
+};
