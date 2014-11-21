@@ -20,7 +20,7 @@ SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 SECRET_KEY = '\$`,$x9?HVY=]cC}_]4q\ym_JvRUuK+kBuY2<8@t"MKhv.%G^:l$?Cvj?s;7J);oxg!ga$2Aj\'Zz9PPwlF<^{eM*1$5qo8-74]~7'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 TEMPLATE_DEBUG = False
 
@@ -86,12 +86,12 @@ STATICFILES_DIRS = (
     os.path.join(SETTINGS_PATH, 'static'),
 )
 
+MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media_root')
+MEDIA_URL = '/media/'
+
 TEMPLATE_DIRS = (
     os.path.join(SETTINGS_PATH, 'html'),
 )
-
-MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media_root')
-MEDIA_URL = '/media/'
 
 INSTALLED_APPS += ('django_summernote', )
 SUMMERNOTE_CONFIG = {
