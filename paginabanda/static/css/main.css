@@ -16,8 +16,15 @@ body {
   max-width: 90%;
 }
 
+#page-header {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 1999;
+}
+
 section {
-  position: relative;
   display: none;
   overflow: auto;
   width: 100%;
@@ -51,12 +58,12 @@ section {
 }
 
 /********************* NAV *************************/
-nav.navbar {
-/*   float: right; */
+#navigation {
+
 }
 
 .navbar-header button, .navbar-header span {
-  border: 2px solid DimGray;
+  border: 2px solid dimgray;
 }
 
 .navbar-nav {
