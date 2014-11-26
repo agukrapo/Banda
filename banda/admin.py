@@ -19,13 +19,16 @@ class FotosAdmin(AdminImageMixin, admin.ModelAdmin):
 class SeccionesAdmin(SingletonModelAdmin):
     pass
 
+class ComentarioAdmin(admin.ModelAdmin):
+    search_fields = ['autor']
+
 admin.site.register(Cancion)
 admin.site.register(Album)
 admin.site.register(Presentacion)
 admin.site.register(Foto, FotosAdmin)
 admin.site.register(Fondos, FondosAdmin)
 admin.site.register(Video)
-admin.site.register(Comentario)
+admin.site.register(Comentario, ComentarioAdmin)
 admin.site.register(Nosotros, NosotrosAdmin)
 admin.site.register(Contacto, ContactoAdmin)
 admin.site.register(Secciones, SeccionesAdmin)
