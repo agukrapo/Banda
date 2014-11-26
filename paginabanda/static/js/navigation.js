@@ -1,8 +1,9 @@
 define([ 'jquery', 
          'underscore', 
          'backbone',
+         'bootstrap',
          'router',
-         'models/secciones'], function($, _, Backbone, router, secciones) {
+         'models/secciones'], function($, _, Backbone, Bootstrap, router, secciones) {
 
   var isTransitioning = function() {
     return $('body').attr('transitioningTo') !== undefined;
@@ -20,9 +21,8 @@ define([ 'jquery',
 
       $nav.click(function(clickEvent) {
         if (!isTransitioning()) {
-          router.navigate(
-            $(clickEvent.currentTarget).attr('href').replace('#', ''), { trigger: true });
-          }
+          router.navigate($(clickEvent.currentTarget).attr('href').replace('#', ''), { trigger: true });
+        }
         clickEvent.preventDefault();
       });
     }    

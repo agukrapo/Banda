@@ -21,8 +21,8 @@ require([ 'banda' ], function(Banda) {
   Banda.begin();
 });
 
-requirejs.onError = function (err) {
+requirejs.onError = function (info) {
   require(['views/error'], function (error) {
-    error.show();
+    error.show(info);
   });
 };

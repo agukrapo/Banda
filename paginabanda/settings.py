@@ -100,7 +100,8 @@ SUMMERNOTE_CONFIG = {
     'lang': 'es-ES',
 }
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+if not DEBUG:
+    STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
 ADMINS = (('Agustin', 'agukrapo@gmail.com'), )
 
