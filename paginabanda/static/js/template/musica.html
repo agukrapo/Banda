@@ -4,7 +4,7 @@
     <h1>Musica</h1>
   </header>
 
-  <%_.forEach(musica, function (album, i) {%>
+  <%_.forEach(data.models, function (album, i) {%>
 
   <div class="row">
     <div class="col-md-6">
@@ -14,13 +14,14 @@
     </div>
     <div class="col-md-6">
       <h2><%=album.get('nombre')%></h2>
-      <p class="h4"><%=album.get('descripcion')%>
-      <p>
+      <p class="h4"><%=album.get('descripcion')%></p>
       <ol>
         <%_.forEach(album.get('canciones'), function (cancion, j) {%>
+        
         <li><% if (cancion.url && cancion.url.contains('soundcloud')) { %> <a href="#" data-toggle="modal" data-target="#myModal<%=i%><%=j%>"> <%=cancion.nombre%> </a> <% } else if (cancion.url) { %> <a href="<%=decodeURIComponent(cancion.url)%>"> <%=cancion.nombre%> </a> <% } else { %>
           <p class="cancion"><%=cancion.nombre%></p> <% } %>
         </li> <% if (cancion.url && cancion.url.contains('soundcloud')) { %>
+        
         <div class="modal" id="myModal<%=i%><%=j%>" tabindex="-1">
           <div class="modal-dialog">
             <div class="modal-content">
@@ -30,6 +31,7 @@
             </div>
           </div>
         </div>
+        
         <% } %> <%})%>
       </ol>
     </div>

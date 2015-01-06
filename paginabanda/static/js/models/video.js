@@ -1,5 +1,6 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Backbone.Model.extend({
+define(['models/basemodel'], function(BaseModel) {
+  
+  return BaseModel.extend({
     parse: function(response, options) {
       var videoId = '';
       var regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/;
@@ -12,4 +13,5 @@ define([ 'underscore', 'backbone' ], function(_, Backbone) {
       return response;
     } 
   });
+  
 });

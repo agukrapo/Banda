@@ -4,7 +4,7 @@
     <h1>Videos</h1>
   </header>
 
-  <%_.forEach(collection.models, function (video, i) {%> <%if (i % 3 === 0) {%>
+  <%_.forEach(data.models, function (video, i) {%> <%if (i % 3 === 0) {%>
   <div class="row">
     <%}%>
 
@@ -33,21 +33,21 @@
       </div>
     </div>
 
-    <%if (i % 3 === 2 || i === (videos.length - 1)) {%>
+    <%if (i % 3 === 2 || i === (data.models.length - 1)) {%>
   </div>
-  <%}%> <%})%> <%if (collection.hasPrevious() || collection.hasNext()) {%>
-  <div class="row">
+  <%}%> <%})%> <%if (data.hasPrevious() || data.hasNext()) {%>
+  <footer class="row">
     <div class="col-md-6">
-      <%if (collection.hasPrevious()) {%>
-      <button id="previous-page" class="btn btn-default pull-left">Videos M&aacute;s Nuevos</button>
+      <%if (data.hasPrevious()) {%>
+      <button id="previous-videos-page" class="btn btn-default pull-left">Videos M&aacute;s Nuevos</button>
       <% } %>
     </div>
     <div class="col-md-6">
-      <%if (collection.hasNext()) {%>
-      <button id="next-page" class="btn btn-default pull-right">Videos M&aacute;s Viejos</button>
+      <%if (data.hasNext()) {%>
+      <button id="next-videos-page" class="btn btn-default pull-right">Videos M&aacute;s Viejos</button>
       <% } %>
     </div>
-  </div>
+  </footer>
   <% } %>
 
 </div>

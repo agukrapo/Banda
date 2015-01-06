@@ -1,8 +1,4 @@
-define([ 'underscore', 
-         'backbone', 
-         'models/foto',
-         'collections/pagedcollection'
-       ], function(_, Backbone, Foto, PagedCollection) {
+define(['models/foto', 'collections/pagedcollection'], function(Foto, PagedCollection) {
   
   var Fotos = PagedCollection.extend({
     model: Foto,

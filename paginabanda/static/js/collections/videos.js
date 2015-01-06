@@ -1,8 +1,4 @@
-define([ 'underscore', 
-         'backbone', 
-         'models/video',
-         'collections/pagedcollection'
-       ], function(_, Backbone, Video, PagedCollection) {
+define(['models/video', 'collections/pagedcollection'], function(Video, PagedCollection) {
 
   var Videos = PagedCollection.extend({
     model: Video,

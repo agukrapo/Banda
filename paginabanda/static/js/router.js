@@ -21,23 +21,13 @@ define([ 'jquery',
   };
   
   var transitionTo = function(id) {
-    var currentId = $('body').attr('currentsection');
-    
-    if (currentId !== undefined) {
-      $('body').attr('transitioningTo', id);
-      $('#' + currentId).hide();
-      $('body').removeAttr('transitioningTo');
-    }
-    
-    $('#' + id).show();
     setFondo(id);
-    $('body').attr('currentsection', id);
-    
     $('#navigation').find('li').removeClass('active');
     $('a[href="#' + id + '"]').parent().addClass('active');
   };
   
   var Router = Backbone.Router.extend({
+    baseTitle: 'basettitle | ',
     routes: {
       '': 'inicio',
       'inicio': 'inicio',
@@ -50,19 +40,16 @@ define([ 'jquery',
       'fotos': 'fotos',
       '*default': 'inicio'
     },
-    commonRoute: function(name, alwaysRender) {
+    commonRoute: function(name) {
       if (!secciones.get('inicio')) {
         window.location = /maintenance/;
       } else {
         if (secciones.get(name)) {
+          document.title = this.baseTitle + name;
           Loader.show();
-          
-          require(['views/' + name + 'View'], function (view) {
-            if (alwaysRender) {
-              view.render();
-            }
+          require(['views/' + name + 'view'], function (view) {
+            view.refresh(); 
           });
-          
           transitionTo(name);
         } else {
           this.inicio();
@@ -82,10 +69,10 @@ define([ 'jquery',
       this.commonRoute('videos');
     },
     presentaciones: function() {
-      this.commonRoute('presentaciones', true);
+      this.commonRoute('presentaciones');
     },
     muro: function() {
-      this.commonRoute('muro', true);
+      this.commonRoute('muro');
     },
     contacto: function() {
       this.commonRoute('contacto');

@@ -10,7 +10,7 @@
     </div>
   </div>
 
-  <% _.forEach(collection.models, function (comentario, i) { %>
+  <% _.forEach(data.models, function (comentario, i) { %>
 
   <div class="row">
     <div class="col-md-12">
@@ -21,19 +21,19 @@
     </div>
   </div>
 
-  <%})%> <%if (collection.hasPrevious() || collection.hasNext()) {%>
-  <div class="row">
+  <%})%> <%if (data.hasPrevious() || data.hasNext()) {%>
+  <footer class="row">
     <div class="col-md-6">
-      <%if (collection.hasPrevious()) {%>
-      <button id="previous-page" class="btn btn-default pull-left">Comentarios M&aacute;s Nuevos</button>
+      <%if (data.hasPrevious()) {%>
+      <button id="previous-muro-page" class="btn btn-default pull-left">Comentarios M&aacute;s Nuevos</button>
       <% } %>
     </div>
     <div class="col-md-6">
-      <%if (collection.hasNext()) {%>
-      <button id="next-page" class="btn btn-default pull-right">Comentarios M&aacute;s Viejos</button>
+      <%if (data.hasNext()) {%>
+      <button id="next-muro-page" class="btn btn-default pull-right">Comentarios M&aacute;s Viejos</button>
       <% } %>
     </div>
-  </div>
+  </footer>
   <% } %>
 
 </div>

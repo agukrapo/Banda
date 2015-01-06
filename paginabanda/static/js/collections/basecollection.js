@@ -1,12 +1,17 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
+define(['backbone'], function(Backbone) {
   return Backbone.Collection.extend({
-    fetch : function(options) {
-      options = options || {};    
+    isFetched: false,
+    fetch : function() {
+      options = {};
       options.error = function(data) {
         require(['views/error'], function (error) {
           error.show(data);
         });
-      }; 
+      };
+      var that = this;
+      options.success = function() {
+        that.isFetched = true;
+      };
       return Backbone.Collection.prototype.fetch.call(this, options);
     }
   });

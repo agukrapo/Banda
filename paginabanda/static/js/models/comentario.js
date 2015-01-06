@@ -1,4 +1,4 @@
-define([ 'underscore', 'backbone', 'models/basemodel' ], function(_, Backbone, BaseModel) {
+define(['models/basemodel'], function(BaseModel) {
  
   return BaseModel.extend({
     url: '/banda/comentario/',

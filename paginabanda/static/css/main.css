@@ -31,7 +31,6 @@ body {
 }
 
 section {
-  display: none;
   overflow: auto;
   width: 100%;
 }
@@ -42,10 +41,6 @@ section {
 
 .help-block {
   display: none;
-}
-
-#next-page, #previous-page {
-  margin-bottom: 20px;
 }
 
 .page-header {
@@ -63,12 +58,11 @@ section {
   transform: translate(-50%, -50%);
 }
 
-
-/********************* NAV *************************/
-#navigation {
-
+footer {
+  margin-bottom: 20px;
 }
 
+/********************* NAV *************************/
 .navbar-header button, .navbar-header span {
   border: 2px solid dimgray;
 }

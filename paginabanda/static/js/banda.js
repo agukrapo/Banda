@@ -1,9 +1,8 @@
 define([ 'jquery',
-         'underscore', 
          'backbone', 
          'models/fondos',
          'models/secciones'
-         ], function($, _, Backbone, fondos, secciones) {
+         ], function($, Backbone, fondos, secciones) {
 
   $.when(fondos.fetch(), secciones.fetch()).done(function() {
     

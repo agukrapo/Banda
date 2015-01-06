@@ -4,7 +4,7 @@
     <h1>Fotos</h1>
   </header>
 
-  <%_.forEach(collection.models, function (foto, i) {%> <%if (i % 4 === 0) {%>
+  <%_.forEach(data.models, function (foto, i) {%> <%if (i % 4 === 0) {%>
   <div class="row">
     <%}%>
 
@@ -29,20 +29,20 @@
       </div>
     </div>
 
-    <%if (i % 4 === 3 || i === (collection.length - 1)) {%>
+    <%if (i % 4 === 3 || i === (data.length - 1)) {%>
   </div>
-  <% } %> <% }) %> <%if (collection.hasPrevious() || collection.hasNext()) {%>
-  <div class="row">
+  <% } %> <% }) %> <%if (data.hasPrevious() || data.hasNext()) {%>
+  <footer class="row">
     <div class="col-md-6">
-      <%if (collection.hasPrevious()) {%>
-      <button id="previous-page" class="btn btn-default pull-left">Fotos M&aacute;s Nuevas</button>
+      <%if (data.hasPrevious()) {%>
+      <button id="previous-fotos-page" class="btn btn-default pull-left">Fotos M&aacute;s Nuevas</button>
       <% } %>
     </div>
     <div class="col-md-6">
-      <%if (collection.hasNext()) {%>
-      <button id="next-page" class="btn btn-default pull-right">Fotos M&aacute;s Viejas</button>
+      <%if (data.hasNext()) {%>
+      <button id="next-fotos-page" class="btn btn-default pull-right">Fotos M&aacute;s Viejas</button>
       <% } %>
     </div>
-  </div>
+  </footer>
   <% } %>
 </div>
