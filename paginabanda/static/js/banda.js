@@ -5,15 +5,15 @@ define([ 'jquery',
          ], function($, Backbone, fondos, secciones) {
 
   $.when(fondos.fetch(), secciones.fetch()).done(function() {
+
+    require(['views/navigation'], function (navigation) {
+      navigation.render();
+    });
     
     require(['router'], function (router) {
       Backbone.history.start();
     });
-  
-    require(['navigation'], function (Navigation) {
-      Navigation.setup();
-    });
- 
+
     var resize = function() {
       var windowHeight = $(window).height()
       $('section').css('height', windowHeight + 'px');

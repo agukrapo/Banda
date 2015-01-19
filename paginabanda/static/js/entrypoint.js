@@ -28,7 +28,7 @@ require([ 'banda' ], function(Banda) {
 });
 
 requirejs.onError = function (info) {
-  console.log(info);
+  console.log(info.stack);
   require(['views/error'], function (error) {
     error.show();
   });

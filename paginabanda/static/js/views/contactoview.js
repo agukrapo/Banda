@@ -1,10 +1,10 @@
 define([ 'underscore', 
-         'views/baseview',
+         'views/basedataview',
          'models/contacto',
          'text!template/contacto.html'
-       ], function(_, BaseView, contacto, template) {
+       ], function(_, BaseDataView, contacto, template) {
   
-  var ContactoView = BaseView.extend({
+  var ContactoView = BaseDataView.extend({
     template: _.template(template),
     data: contacto,
   });

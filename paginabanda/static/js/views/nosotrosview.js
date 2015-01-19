@@ -1,10 +1,10 @@
 define([ 'underscore',
-         'views/baseview',
+         'views/basedataview',
          'models/nosotros',
          'text!template/nosotros.html'
-       ], function(_, BaseView, nosotros, template) {
+       ], function(_, BaseDataView, nosotros, template) {
   
-  var NosotrosView = BaseView.extend({
+  var NosotrosView = BaseDataView.extend({
     data: nosotros,
     template: _.template(template),
   });

@@ -5,27 +5,8 @@ define([ 'jquery',
          'loader',
          'models/fondos',
          'models/secciones'
-         ], function($, backstretch, _, Backbone, Loader, fondos, secciones) {
+       ], function($, backstretch, _, Backbone, Loader, fondos, secciones) {
 
-  var setFondo = function(section) {
-    var src = fondos.get(section)
-    var fondo = new Image();
-    fondo.src = src;
-    
-    fondo.onload = Loader.hide;
-    if (fondo.complete) {
-      Loader.hide();
-    }
-    
-    $('body').backstretch(src);
-  };
-  
-  var transitionTo = function(id) {
-    setFondo(id);
-    $('#navigation').find('li').removeClass('active');
-    $('a[href="#' + id + '"]').parent().addClass('active');
-  };
-  
   var Router = Backbone.Router.extend({
     baseTitle: 'basettitle | ',
     routes: {
@@ -39,22 +20,6 @@ define([ 'jquery',
       'contacto': 'contacto',
       'fotos': 'fotos',
       '*default': 'inicio'
-    },
-    commonRoute: function(name) {
-      if (!secciones.get('inicio')) {
-        window.location = /maintenance/;
-      } else {
-        if (secciones.get(name)) {
-          document.title = this.baseTitle + name;
-          Loader.show();
-          require(['views/' + name + 'view'], function (view) {
-            view.refresh(); 
-          });
-          transitionTo(name);
-        } else {
-          this.inicio();
-        }
-      }
     },
     inicio: function() {
       this.commonRoute('inicio');
@@ -79,7 +44,42 @@ define([ 'jquery',
     },
     fotos: function() {
       this.commonRoute('fotos');
+    },
+    commonRoute: function(name) {
+      if (!secciones.get('inicio')) {
+        window.location = /maintenance/;
+      } else {
+        if (secciones.get(name)) {
+          document.title = this.baseTitle + name;
+          Loader.show();
+          require(['views/' + name + 'view'], function (view) {
+            view.refresh(); 
+          });
+          this.transitionTo(name);
+        } else {
+          this.inicio();
+        }
+      }
+    },
+    transitionTo: function(section) {
+      this.setFondo(section);
+      require(['views/navigation'], function (navigation) {
+        navigation.setActive(section);
+      });
+    },
+    setFondo: function(section) {
+      var src = fondos.get(section)
+      var fondo = new Image();
+      fondo.src = src;
+      
+      fondo.onload = Loader.hide;
+      if (fondo.complete) {
+        Loader.hide();
+      }
+      
+      $('body').backstretch(src);
     }
+    
   });
   
   return new Router();

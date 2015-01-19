@@ -1,5 +1,5 @@
-define([ 'views/baseview' ], function(BaseView) {
-  return BaseView.extend({
+define([ 'views/basedataview' ], function(BaseDataView) {
+  return BaseDataView.extend({
     nextPage: function() {
       this.data.next();
       this.data.fetch();

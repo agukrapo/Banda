@@ -9,26 +9,31 @@
     <%}%>
 
     <div class="col-md-4">
-      <a class="thumbnail" href="#" data-toggle="modal" data-target="#modal-video-<%=i%>"> <img src="/static/img/img_load.gif" class="img-responsive" alt="<%=video.get('nombre')%>" data-echo="<%=video.get('thumbnail')%>">
+      <a class="video thumbnail" href="#" data-toggle="modal" data-target="#modal-video-<%=i%>"> 
+        <img src="/static/img/img_load.gif" class="img-responsive" alt="<%=video.get('nombre')%>" data-echo="<%=video.get('thumbnail')%>">
       </a>
     </div>
 
     <div class="modal" id="modal-video-<%=i%>" tabindex="-1">
       <div class="modal-dialog modal-lg">
         <div class="modal-content">
+          
           <%if (video.get('nombre').length > 0) {%>
           <div class="modal-header">
             <h2><%=video.get('nombre')%></h2>
           </div>
           <% } %>
+          
           <div class="modal-body">
             <iframe width="853" height="480" src="<%=video.get('embed')%>" frameborder="0" allowfullscreen></iframe>
           </div>
+          
           <%if (video.get('descripcion').length > 0) {%>
           <div class="modal-footer">
             <p><%=video.get('descripcion')%></p>
           </div>
           <% } %>
+        
         </div>
       </div>
     </div>
