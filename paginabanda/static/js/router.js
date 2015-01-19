@@ -22,30 +22,30 @@ define([ 'jquery',
       '*default': 'inicio'
     },
     inicio: function() {
-      this.commonRoute('inicio');
+      this.common('inicio');
     },
     nosotros: function() {
-      this.commonRoute('nosotros');
+      this.common('nosotros');
     },
     musica: function() {
-      this.commonRoute('musica');
+      this.common('musica');
     },
     videos: function() {
-      this.commonRoute('videos');
+      this.common('videos');
     },
     presentaciones: function() {
-      this.commonRoute('presentaciones');
+      this.common('presentaciones');
     },
     muro: function() {
-      this.commonRoute('muro');
+      this.common('muro');
     },
     contacto: function() {
-      this.commonRoute('contacto');
+      this.common('contacto');
     },
     fotos: function() {
-      this.commonRoute('fotos');
+      this.common('fotos');
     },
-    commonRoute: function(name) {
+    common: function(name) {
       if (!secciones.get('inicio')) {
         window.location = /maintenance/;
       } else {
