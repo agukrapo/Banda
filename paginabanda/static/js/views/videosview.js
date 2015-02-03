@@ -1,22 +1,3 @@
-define([ 'underscore', 
-         'echo',
-         'bootstrap',
-         'views/collectionview',
-         'collections/videos',
-         'text!template/videos.html'
-       ], function(_, Echo, Bootstrap, CollectionView, videos, template) {
+/*! echo.js v1.6.0 | (c) 2014 @toddmotto | https://github.com/toddmotto/echo */
 
-  var VideosView = CollectionView.extend({
-    data: videos,
-    template: _.template(template),
-    events: {
-      "click #next-videos-page": "nextPage",
-      "click #previous-videos-page": "previousPage"
-    },
-    afterRender:function() {
-      Echo.init();
-    }
-  });
-
-  return new VideosView();
-});
+!function(e,t){"function"==typeof define&&define.amd?define("echo",[],function(){return t(e)}):"object"==typeof exports?module.exports=t:e.echo=t(e)}(this,function(e){var t,n,o,i,d,a={},l=function(){},r=function(e,t){var n=e.getBoundingClientRect();return n.right>=t.l&&n.bottom>=t.t&&n.left<=t.r&&n.top<=t.b},c=function(){(i||!n)&&(clearTimeout(n),n=setTimeout(function(){a.render(),n=null},o))};return a.init=function(n){n=n||{};var r=n.offset||0,s=n.offsetVertical||r,u=n.offsetHorizontal||r,v=function(e,t){return parseInt(e||t,10)};t={t:v(n.offsetTop,s),b:v(n.offsetBottom,s),l:v(n.offsetLeft,u),r:v(n.offsetRight,u)},o=v(n.throttle,250),i=n.debounce!==!1,d=!!n.unload,l=n.callback||l,a.render(),document.addEventListener?(e.addEventListener("scroll",c,!1),e.addEventListener("load",c,!1)):(e.attachEvent("onscroll",c),e.attachEvent("onload",c))},a.render=function(){for(var n,o,i=document.querySelectorAll("img[data-echo]"),c=i.length,s={l:0-t.l,t:0-t.t,b:(e.innerHeight||document.documentElement.clientHeight)+t.b,r:(e.innerWidth||document.documentElement.clientWidth)+t.r},u=0;c>u;u++)o=i[u],r(o,s)?(d&&o.setAttribute("data-echo-placeholder",o.src),o.src=o.getAttribute("data-echo"),d||o.removeAttribute("data-echo"),l(o,"load")):d&&(n=o.getAttribute("data-echo-placeholder"))&&(o.src=n,o.removeAttribute("data-echo-placeholder"),l(o,"unload"));c||a.detach()},a.detach=function(){document.removeEventListener?e.removeEventListener("scroll",c):e.detachEvent("onscroll",c),clearTimeout(n)},a}),define("models/video",["models/basemodel"],function(e){return e.extend({parse:function(e){var t="",n=/^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#\&\?]*).*/,o=e.url.match(n);return o&&(t=o[7]),e.thumbnail="//img.youtube.com/vi/"+t+"/0.jpg",e.embed="//www.youtube.com/embed/"+t,e}})}),define("collections/videos",["models/video","collections/pagedcollection"],function(e,t){var n=t.extend({model:e,urlPart:"/banda/videos/"});return new n}),define("text!template/videos.html",[],function(){return'\n<div class="container">\n  <header class="page-header">\n    <h1>Videos</h1>\n  </header>\n\n  <%_.forEach(data.models, function (video, i) {%> <%if (i % 3 === 0) {%>\n  <div class="row">\n    <%}%>\n\n    <div class="col-md-4">\n      <a class="video thumbnail" href="#" data-toggle="modal" data-target="#modal-video-<%=i%>"> \n        <img src="/static/img/img_load.gif" class="img-responsive" alt="<%=video.get(\'nombre\')%>" data-echo="<%=video.get(\'thumbnail\')%>">\n      </a>\n    </div>\n\n    <div class="modal" id="modal-video-<%=i%>" tabindex="-1">\n      <div class="modal-dialog modal-lg">\n        <div class="modal-content">\n          \n          <%if (video.get(\'nombre\').length > 0) {%>\n          <div class="modal-header">\n            <h2><%=video.get(\'nombre\')%></h2>\n          </div>\n          <% } %>\n          \n          <div class="modal-body">\n            <iframe width="853" height="480" src="<%=video.get(\'embed\')%>" frameborder="0" allowfullscreen></iframe>\n          </div>\n          \n          <%if (video.get(\'descripcion\').length > 0) {%>\n          <div class="modal-footer">\n            <p><%=video.get(\'descripcion\')%></p>\n          </div>\n          <% } %>\n        \n        </div>\n      </div>\n    </div>\n\n    <%if (i % 3 === 2 || i === (data.models.length - 1)) {%>\n  </div>\n  <%}%> <%})%> <%if (data.hasPrevious() || data.hasNext()) {%>\n  <footer class="row">\n    <div class="col-md-6">\n      <%if (data.hasPrevious()) {%>\n      <button id="previous-videos-page" class="btn btn-default pull-left">Videos M&aacute;s Nuevos</button>\n      <% } %>\n    </div>\n    <div class="col-md-6">\n      <%if (data.hasNext()) {%>\n      <button id="next-videos-page" class="btn btn-default pull-right">Videos M&aacute;s Viejos</button>\n      <% } %>\n    </div>\n  </footer>\n  <% } %>\n\n</div>'}),define("views/videosview",["underscore","echo","bootstrap","views/collectionview","collections/videos","text!template/videos.html"],function(e,t,n,o,i,d){var a=o.extend({data:i,template:e.template(d),events:{"click #next-videos-page":"nextPage","click #previous-videos-page":"previousPage"},afterRender:function(){t.init()}});return new a});

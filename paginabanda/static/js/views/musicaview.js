@@ -1,18 +1,3 @@
-define([ 'underscore', 
-         'echo',
-         'bootstrap',
-         'views/collectionview',
-         'collections/musica',
-         'text!template/musica.html'
-       ], function(_, Echo, Bootstrap, CollectionView, musica, template) {
-  
-  var MusicaView = CollectionView.extend({
-    data: musica,
-    template: _.template(template),
-    afterRender:function() {
-      Echo.init();
-    }
-  });
-  
-  return new MusicaView();
-});
+/*! echo.js v1.6.0 | (c) 2014 @toddmotto | https://github.com/toddmotto/echo */
+
+!function(e,n){"function"==typeof define&&define.amd?define("echo",[],function(){return n(e)}):"object"==typeof exports?module.exports=n:e.echo=n(e)}(this,function(e){var n,t,o,a,c,i={},l=function(){},d=function(e,n){var t=e.getBoundingClientRect();return t.right>=n.l&&t.bottom>=n.t&&t.left<=n.r&&t.top<=n.b},r=function(){(a||!t)&&(clearTimeout(t),t=setTimeout(function(){i.render(),t=null},o))};return i.init=function(t){t=t||{};var d=t.offset||0,s=t.offsetVertical||d,u=t.offsetHorizontal||d,m=function(e,n){return parseInt(e||n,10)};n={t:m(t.offsetTop,s),b:m(t.offsetBottom,s),l:m(t.offsetLeft,u),r:m(t.offsetRight,u)},o=m(t.throttle,250),a=t.debounce!==!1,c=!!t.unload,l=t.callback||l,i.render(),document.addEventListener?(e.addEventListener("scroll",r,!1),e.addEventListener("load",r,!1)):(e.attachEvent("onscroll",r),e.attachEvent("onload",r))},i.render=function(){for(var t,o,a=document.querySelectorAll("img[data-echo]"),r=a.length,s={l:0-n.l,t:0-n.t,b:(e.innerHeight||document.documentElement.clientHeight)+n.b,r:(e.innerWidth||document.documentElement.clientWidth)+n.r},u=0;r>u;u++)o=a[u],d(o,s)?(c&&o.setAttribute("data-echo-placeholder",o.src),o.src=o.getAttribute("data-echo"),c||o.removeAttribute("data-echo"),l(o,"load")):c&&(t=o.getAttribute("data-echo-placeholder"))&&(o.src=t,o.removeAttribute("data-echo-placeholder"),l(o,"unload"));r||i.detach()},i.detach=function(){document.removeEventListener?e.removeEventListener("scroll",r):e.detachEvent("onscroll",r),clearTimeout(t)},i}),define("models/album",["models/basemodel"],function(e){return e.extend({})}),define("collections/musica",["models/album","collections/basecollection"],function(e,n){var t=n.extend({model:e,url:"/banda/musica/"});return new t}),define("text!template/musica.html",[],function(){return'\n<div class="container">\n  <header class="page-header">\n    <h1>Musica</h1>\n  </header>\n\n  <%_.forEach(data.models, function (album, i) {%>\n\n  <div class="row">\n    <div class="col-md-6">\n      <div class="thumbnail">\n        <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=album.get(\'tapa\')%>" alt="Tapa de <%=album.get(\'nombre\')%>">\n      </div>\n    </div>\n    <div class="col-md-6">\n      <h2><%=album.get(\'nombre\')%></h2>\n      <p class="h4"><%=album.get(\'descripcion\')%></p>\n      <ol>\n        <%_.forEach(album.get(\'canciones\'), function (cancion, j) {%>\n        \n        <li><% if (cancion.url && cancion.url.contains(\'soundcloud\')) { %> <a href="#" data-toggle="modal" data-target="#myModal<%=i%><%=j%>"> <%=cancion.nombre%> </a> <% } else if (cancion.url) { %> <a href="<%=decodeURIComponent(cancion.url)%>"> <%=cancion.nombre%> </a> <% } else { %>\n          <p class="cancion"><%=cancion.nombre%></p> <% } %>\n        </li> <% if (cancion.url && cancion.url.contains(\'soundcloud\')) { %>\n        \n        <div class="modal" id="myModal<%=i%><%=j%>" tabindex="-1">\n          <div class="modal-dialog">\n            <div class="modal-content">\n              <div class="modal-body">\n                <iframe width="558" src="//w.soundcloud.com/player/?url=<%=cancion.url%>" frameborder="0" allowfullscreen></iframe>\n              </div>\n            </div>\n          </div>\n        </div>\n        \n        <% } %> <%})%>\n      </ol>\n    </div>\n  </div>\n  <%})%>\n</div>'}),define("views/musicaview",["underscore","echo","bootstrap","views/collectionview","collections/musica","text!template/musica.html"],function(e,n,t,o,a,c){var i=o.extend({data:a,template:e.template(c),afterRender:function(){n.init()}});return new i});
