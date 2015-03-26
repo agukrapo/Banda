@@ -4,8 +4,8 @@
     jquery : 'empty:',
     underscore : 'empty:',
     backbone : 'empty:',
-    bootstrap : 'empty:',
-    echo : 'lib/echo-1.6.0.min',
+    bootstrapmodal : 'empty:',
+    echo : 'empty:',
     backstretch : 'empty:',
   },
   modules: [
@@ -18,8 +18,7 @@
         'views/basedataview',
         'views/collectionview',
         'collections/basecollection',
-        'collections/pagedcollection',
-        'lib/echo-1.6.0.min.js'
+        'collections/pagedcollection'
       ],
     },
     {

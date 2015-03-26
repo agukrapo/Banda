@@ -1,11 +1,10 @@
 define([ 'jquery', 
          'underscore', 
          'backbone', 
-         'bootstrap',
          'router',
          'models/secciones',
          'text!template/navigation.html'
-       ], function($, _, Backbone, Bootstrap, router, secciones, template) {
+       ], function($, _, Backbone, router, secciones, template) {
 
   var Navigation = Backbone.View.extend({
     el: '#page-header',

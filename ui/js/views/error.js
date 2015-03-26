@@ -1,7 +1,7 @@
 define([ 'jquery', 
-         'bootstrap', 
+         'bootstrapmodal', 
          'text!template/error.html' 
-       ], function($, Bootstrap, template) {
+       ], function($, Modal, template) {
     
   var Error = Backbone.View.extend({
     template: _.template(template),

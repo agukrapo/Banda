@@ -1,10 +1,10 @@
 define([ 'underscore', 
          'echo',
-         'bootstrap',
+         'bootstrapmodal',
          'views/collectionview',
          'collections/musica',
          'text!template/musica.html'
-       ], function(_, Echo, Bootstrap, CollectionView, musica, template) {
+       ], function(_, Echo, Modal, CollectionView, musica, template) {
   
   var MusicaView = CollectionView.extend({
     data: musica,

@@ -1,10 +1,10 @@
 define([ 'jquery',
          'underscore', 
          'backbone',
-         'bootstrap',
+         'bootstrapmodal',
          'models/comentario',
          'text!template/comentarioform.html'
-       ], function($, _, Backbone, Bootstrap, Comentario, comentarioFormTemplate) {
+       ], function($, _, Backbone, Modal, Comentario, comentarioFormTemplate) {
 
   var ComentarioForm = Backbone.View.extend({
     template: _.template(comentarioFormTemplate),

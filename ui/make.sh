@@ -10,8 +10,8 @@ CSS_MOVE_DEST="../paginabanda/static/css"
 clean() {
     echo "Cleaning..."
 
-    rm $JS_DIST/*/*
-    rm $CSS_DIST/*/*
+    rm -r $JS_DIST/*
+    rm -r $CSS_DIST/*
 
     rm -r $JS_MOVE_DEST/*
     rm -r $CSS_MOVE_DEST/*
@@ -46,6 +46,7 @@ move() {
 
     mkdir $JS_MOVE_DEST/lib/
     cp $JS_SRC/lib/echo-1.6.0.min.js $JS_MOVE_DEST/lib/echo-1.6.0.min.js
+    cp $JS_SRC/lib/bootstrap-modal-3.3.4.min.js $JS_MOVE_DEST/lib/bootstrap-modal-3.3.4.min.js
 }
 
 if [ "$1" ]; then

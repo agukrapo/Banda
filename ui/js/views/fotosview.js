@@ -1,10 +1,10 @@
 define([ 'underscore', 
          'echo',
-         'bootstrap',
+         'bootstrapmodal',
          'views/collectionview',
          'collections/fotos',
          'text!template/fotos.html'
-       ], function(_, Echo, Bootstrap, CollectionView, fotos, template) {
+       ], function(_, Echo, Modal, CollectionView, fotos, template) {
 
   var FotosView = CollectionView.extend({
     data: fotos,

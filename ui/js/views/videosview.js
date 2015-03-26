@@ -1,10 +1,10 @@
 define([ 'underscore', 
          'echo',
-         'bootstrap',
+         'bootstrapmodal',
          'views/collectionview',
          'collections/videos',
          'text!template/videos.html'
-       ], function(_, Echo, Bootstrap, CollectionView, videos, template) {
+       ], function(_, Echo, Modal, CollectionView, videos, template) {
 
   var VideosView = CollectionView.extend({
     data: videos,
