@@ -57,5 +57,5 @@
   ],
   optimize: 'uglify2',
   removeCombined: true,
-  dir: './dist/',
+  dir: './dist/js',
 }
