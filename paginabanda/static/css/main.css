@@ -1,0 +1,89 @@
+body {
+  overflow: hidden;
+}
+#loader {
+  position: fixed;
+  z-index: 2000;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: #333333;
+}
+#loading-message {
+  color: white;
+  font-size: large;
+  margin-top: 5px;
+}
+#logo {
+  max-width: 90%;
+}
+#page-header {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 1010;
+}
+section {
+  overflow: auto;
+  width: 100%;
+}
+.container {
+  height: 100%;
+}
+.help-block {
+  display: none;
+}
+.page-header {
+  border-bottom: none;
+}
+.cancion {
+  margin-bottom: 0px;
+}
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+footer {
+  margin-bottom: 20px;
+}
+.navbar-header button, .navbar-header span {
+  border: 2px solid dimgray;
+}
+.navbar-nav {
+  margin-top: 1%; 
+  padding : 10px 30px;
+  background-color: black;
+  opacity: 0.6;
+  filter: alpha(opacity = 60);
+  box-shadow: 1px 4px 10px;
+  padding: 10px 30px;
+}
+.navbar-nav>li {
+  display: inline-block;
+}
+.navbar-nav>li+li {
+  margin-left: 20px;
+}
+.navbar-nav>li>a {
+  padding: 5px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff; 
+  color: rgba(255, 255, 255, .75);
+  border-bottom: 2px solid transparent;
+}
+.navbar-nav>li>a:hover, .navbar-nav>li>a:focus {
+  background-color: transparent;
+  border-bottom-color: rgba(255, 255, 255, .25);
+}
+.navbar-nav>.active>a, .navbar-nav>.active>a:hover, .navbar-nav>.active>a:focus  {
+  color: white;
+  border-bottom-color: white;
+}
+.navbar-nav>.active>a:hover {
+  cursor:default;  
+ }
