@@ -22,15 +22,17 @@ compile() {
 
     r.js -o cssIn=$CSS_SRC/main.css out=$CSS_DIST/main.css
     r.js -o require.build.js
+    uglifyjs $JS_SRC/lib/bootstrap-modal-3.3.4.js -c -m > $JS_DIST/lib/bootstrap-modal-3.3.4.min.js
 }
 
 move() {
     echo "Moving..."
 
-    mkdir $CSS_MOVE_DEST
     cp $CSS_DIST/main.css $CSS_MOVE_DEST/main.css
 
-    mkdir $JS_MOVE_DEST
+    mkdir $CSS_MOVE_DEST/lib/
+    cp $CSS_SRC/lib/bootstrap.custom-3.3.4.min.css $CSS_MOVE_DEST/lib/bootstrap.custom-3.3.4.min.css
+
     cp $JS_DIST/banda.js $JS_MOVE_DEST/banda.js
     cp $JS_DIST/entrypoint.js $JS_MOVE_DEST/entrypoint.js
 
@@ -46,7 +48,7 @@ move() {
 
     mkdir $JS_MOVE_DEST/lib/
     cp $JS_SRC/lib/echo-1.6.0.min.js $JS_MOVE_DEST/lib/echo-1.6.0.min.js
-    cp $JS_SRC/lib/bootstrap-modal-3.3.4.min.js $JS_MOVE_DEST/lib/bootstrap-modal-3.3.4.min.js
+    cp $JS_DIST/lib/bootstrap-modal-3.3.4.min.js $JS_MOVE_DEST/lib/bootstrap-modal-3.3.4.min.js
 }
 
 if [ "$1" ]; then
