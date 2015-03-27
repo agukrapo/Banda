@@ -56,7 +56,7 @@ define([ 'jquery',
             view.refresh(); 
           });
           this.transitionTo(name);
-          Loader.hide();
+          setTimeout(Loader.hide, 250);
         } else {
           this.inicio();
         }

@@ -9,7 +9,7 @@ define([ 'jquery' ], function($) {
     },
     hide : function() {
       if (hideAttempts === 1) {
-        $(selector).hide();
+        $(selector).fadeOut();
       } else {
         hideAttempts--;
       }
