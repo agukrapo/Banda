@@ -51,11 +51,12 @@ define([ 'jquery',
       } else {
         if (secciones.get(name)) {
           document.title = this.baseTitle + name;
-          Loader.show();
+          Loader.show(2);
           require(['views/' + name + 'view'], function (view) {
             view.refresh(); 
           });
           this.transitionTo(name);
+          Loader.hide();
         } else {
           this.inicio();
         }
