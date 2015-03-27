@@ -1,17 +1,12 @@
 define(['jquery', 
-        'underscore', 
-        'backbone', 
+        'views/baseview',
         'models/fondos',
         'text!template/inicio.html'
-       ], function($, _, Backbone, fondos, template) {
+       ], function($, BaseView, fondos, template) {
   
-  var Inicio = Backbone.View.extend({
-    el: '#contenido',
+  var Inicio = BaseView.extend({
     template: _.template(template),
-    refresh: function() {
-      this.render();
-    },
-    render : function() {
+    actualRender : function() {
       this.$el.html(this.template())
       $('#logo').attr('src', fondos.get('logo'));
     }

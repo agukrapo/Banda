@@ -1,6 +1,5 @@
-define([ 'underscore', 'backbone' ], function(_, Backbone) {
-  return Backbone.View.extend({
-    el: '#contenido',
+define([ 'underscore', 'backbone', 'views/baseview' ], function(_, Backbone, BaseView) {
+  return BaseView.extend({
     initialize: function() {
       this.listenTo(this.data, 'sync', this.render);
     },
@@ -11,7 +10,7 @@ define([ 'underscore', 'backbone' ], function(_, Backbone) {
         this.data.fetch();
       }
     },
-    render: function() {
+    actualRender: function() {
       this.$el.html(this.template({ data: this.data, _: _ }));
       this.afterRender();
     },

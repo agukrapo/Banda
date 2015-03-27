@@ -4,7 +4,7 @@ define([ 'jquery' ], function($) {
   
   return {
     show : function() {
-      hideAttempts = 2;
+      hideAttempts = 3;
       $(selector).show();
     },
     hide : function() {
