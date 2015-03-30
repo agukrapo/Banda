@@ -11,7 +11,7 @@ define(['models/basemodel'], function(BaseModel) {
       response.thumbnail = '//img.youtube.com/vi/' + videoId + '/0.jpg';
       response.embed = '//www.youtube.com/embed/' + videoId;
       return response;
-    } 
+    }  
   });
   
 });
