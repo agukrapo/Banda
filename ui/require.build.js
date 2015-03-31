@@ -15,10 +15,12 @@
         'router',
         'views/error', 
         'views/navigation',
+        'views/baseview',
         'views/basedataview',
         'views/collectionview',
         'collections/basecollection',
-        'collections/pagedcollection'
+        'collections/pagedcollection',
+        'useragent'
       ],
     },
     {

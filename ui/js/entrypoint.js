@@ -11,14 +11,10 @@ require.config({
     jquery : '//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min',
     underscore : '//cdnjs.cloudflare.com/ajax/libs/underscore.js/1.7.0/underscore-min',
     backbone : '//cdnjs.cloudflare.com/ajax/libs/backbone.js/1.1.2/backbone-min',
-    bootstrapmodal : 'lib/bootstrap-modal-3.3.4.min',
-    echo : 'lib/echo-1.6.0.min',
+    bootstrapmodal : 'lib/bootstrap-modal.min',
+    echo : 'lib/echo.min',
     backstretch : '//cdnjs.cloudflare.com/ajax/libs/jquery-backstretch/2.0.4/jquery.backstretch.min',
   }
-});
-
-require([ 'banda' ], function(Banda) {
-  Banda.begin();
 });
 
 requirejs.onError = function (info) {
@@ -27,3 +23,7 @@ requirejs.onError = function (info) {
     error.show();
   });
 };
+
+require([ 'banda' ], function(Banda) {
+  Banda.begin();
+});
