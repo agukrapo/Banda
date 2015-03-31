@@ -1,11 +1,12 @@
 define([ 'underscore', 
          'echo',
          'bootstrapmodal',
+         'useragent',
          'views/collectionview',
          'views/videoiframe',
          'collections/videos',
          'text!template/videos.html'
-       ], function(_, Echo, Modal, CollectionView, Iframe, videos, template) {
+       ], function(_, Echo, Modal, userAgent, CollectionView, Iframe, videos, template) {
 
   var VideosView = CollectionView.extend({
     data: videos,
@@ -19,9 +20,14 @@ define([ 'underscore',
       Echo.init();
     },
     openModal: function(event) {
-      var iframe = new Iframe();
-      iframe.model = this.data.models[event.currentTarget.id];
-      iframe.render();
+      var video = this.data.models[event.currentTarget.id];
+      if (userAgent.isMobile()) {
+        window.location = video.get('url');
+      } else {
+        var iframe = new Iframe();
+        iframe.model = video;
+        iframe.render();
+      }
       event.preventDefault();
     }
   });
