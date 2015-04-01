@@ -12,5 +12,3 @@ TODO
 !Fonts
 !fotos modal tamaño
 
-popups en mobile
-

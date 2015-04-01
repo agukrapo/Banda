@@ -3,11 +3,18 @@ define([ 'underscore',
          'collections/basecollection'], function(_, Backbone, BaseCollection) {
   return BaseCollection.extend({
     current: 1,
+    size: undefined,
     total: undefined,
     urlPart: 'OVERIDE-ME',
     url: function() {
-      return this.urlPart + '?page=' + this.current;
+      return this.urlPart + this.buildPageUrlPart() + this.buildSizeUrlPart();
     },
+    buildPageUrlPart: function() {
+      return '?page=' + this.current;
+    },
+    buildSizeUrlPart: function() {
+      return this.size? '&size=' + this.size: '';
+    }, 
     parse: function(response) {
       this.total = response.total;
       this.current = response.current

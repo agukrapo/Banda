@@ -93,21 +93,21 @@ def paginated_result(query_set, page_number, page_size):
 @require_AJAX
 @apply_restrictions_by_view_name
 def get_videos(request):
-    videos = paginated_result(Video.objects.all(), request.GET.get('page', 1), 6)
+    videos = paginated_result(Video.objects.all(), request.GET.get('page', 1), request.GET.get('size', 6))
     return HttpResponse(dumps(videos), content_type='application/json')
 
 @require_GET
 @require_AJAX
 @apply_restrictions_by_view_name
 def get_fotos(request):
-    fotos = paginated_result(Foto.objects.all(), request.GET.get('page', 1), 8)
+    fotos = paginated_result(Foto.objects.all(), request.GET.get('page', 1), request.GET.get('size', 8))
     return HttpResponse(dumps(fotos), content_type='application/json')
 
 @require_GET
 @require_AJAX
 @apply_restrictions_by_view_name
 def get_muro(request):
-    muro = paginated_result(Comentario.objects.all(), request.GET.get('page', 1), 10)
+    muro = paginated_result(Comentario.objects.all(), request.GET.get('page', 1), request.GET.get('size', 10))
     return HttpResponse(dumps(muro), content_type='application/json')
 
 @require_GET
