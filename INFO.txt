@@ -1,11 +1,6 @@
 http://sqlitestudio.pl/
 
-
-http://www.degraeve.com/color-palette/
-http://tympanus.net/codrops/
-
-
-http://stackoverflow.com/questions/18622508/bootstrap-3-and-youtube-in-modal
+http://dimsemenov.com/plugins/magnific-popup/
 ============================
 TODO
 ----------
