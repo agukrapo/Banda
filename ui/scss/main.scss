@@ -1,1 +1,68 @@
 @import "normalize";
+/* @import "navbar"; */
+
+
+/* main styles */
+body {
+  overflow: hidden;
+}
+
+#loader {
+  position: fixed;
+  z-index: 2000;
+  top: 0px;
+  left: 0px;
+  height: 100%;
+  width: 100%;
+  background-color: #333333;
+}
+
+#loading-message {
+  color: white;
+  font-size: large;
+  margin-top: 5px;
+}
+
+#logo {
+  max-width: 90%;
+}
+
+#page-header {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  z-index: 1010;
+}
+
+section {
+  overflow: auto;
+  width: 100%;
+}
+
+.container {
+  height: 100%;
+}
+
+.help-block {
+  display: none;
+}
+
+.page-header {
+  border-bottom: none;
+}
+
+.cancion {
+  margin-bottom: 0px;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+footer {
+  margin-bottom: 20px;
+}

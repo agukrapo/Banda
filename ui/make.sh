@@ -1,26 +1,20 @@
 #!/bin/bash
 
 JS_SRC="./js"
-CSS_SRC="./css"
 JS_DIST="./dist/js"
-CSS_DIST="./dist/css"
 JS_MOVE_DEST="../paginabanda/static/js"
-CSS_MOVE_DEST="../paginabanda/static/css"
 
 clean() {
     echo "Cleaning..."
 
     rm -r $JS_DIST/*
-    rm -r $CSS_DIST/*
 
     rm -r $JS_MOVE_DEST/*
-    rm -r $CSS_MOVE_DEST/*
 }
 
 compile() {
     echo "Compiling..."
 
-    r.js -o cssIn=$CSS_SRC/main.css out=$CSS_DIST/main.css
     r.js -o require.build.js
     uglifyjs $JS_SRC/lib/bootstrap-modal-3.3.4.js -c -m > $JS_DIST/lib/bootstrap-modal.min.js
     uglifyjs $JS_SRC/lib/echo-1.7.0.js -c -m > $JS_DIST/lib/echo.min.js
@@ -28,11 +22,6 @@ compile() {
 
 move() {
     echo "Moving..."
-
-    cp $CSS_DIST/main.css $CSS_MOVE_DEST/main.css
-
-    mkdir $CSS_MOVE_DEST/lib/
-    cp $CSS_SRC/lib/bootstrap.custom-3.3.4.min.css $CSS_MOVE_DEST/lib/bootstrap.custom-3.3.4.min.css
 
     cp $JS_DIST/banda.js $JS_MOVE_DEST/banda.js
     cp $JS_DIST/entrypoint.js $JS_MOVE_DEST/entrypoint.js

@@ -1,10 +1,11 @@
 define([ 'jquery', 
          'underscore', 
-         'backbone', 
+         'backbone',
+         'responsivenav'
          'router',
          'models/secciones',
          'text!template/navigation.html'
-       ], function($, _, Backbone, router, secciones, template) {
+       ], function($, _, Backbone, responsiveNav, router, secciones, template) {
 
   var Navigation = Backbone.View.extend({
     el: '#page-header',
@@ -15,6 +16,8 @@ define([ 'jquery',
     },
     setup: function() {
       this.$el.find('a').each($.proxy(this.each, this)).click($.proxy(this.click, this));
+//      var navigation = responsiveNav(".nav-collapse");
+      var navigation = responsiveNav(".nav-collapse");
     },
     isTransitioning: function() {
       return $('body').attr('transitioningTo') !== undefined;
