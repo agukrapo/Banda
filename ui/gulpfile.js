@@ -20,7 +20,7 @@ gulp.task('clean', function (callBack) {
     config.cssDist + '/*',
     config.jsDist + '/*',
     config.cssStaticDest + '/*',
-    config.jsStaticDest + '/js/*'
+    config.jsStaticDest + '/*'
   ], {force: true} , callBack);
 });
 
@@ -35,7 +35,7 @@ gulp.task('css', function() {
 
 gulp.task('requirejs', shell.task(['r.js -o require.build.js']));
 
-gulp.task('copyjs', function() {
+gulp.task('copyjs', ['requirejs'], function() {
   gulp.src(config.jsDist + '/banda.js')
     .pipe(gulp.dest(config.jsStaticDest));
   
