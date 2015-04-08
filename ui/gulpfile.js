@@ -4,39 +4,58 @@ var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var del = require('del');
-
-var rjs = require('gulp-requirejs');
-var rjsConfig = require('./require.build.json');
+var shell = require('gulp-shell')
+var uglify = require('gulp-uglify');
 
 var config = {
-    dist: './dist',
-    staticDest: '../paginabanda/static'
+    jsSrc: './js',
+    jsDist: './dist/js',
+    cssDist: './dist/css',
+    jsStaticDest: '../paginabanda/static/js',
+    cssStaticDest: '../paginabanda/static/css',
 }
 
 gulp.task('clean', function (callBack) {
   del([
-    config.dist + '/css/*',
-//    config.dist + '/js/*',
-    config.staticDest + '/css/*',
-//    config.staticDest + '/js/*'
+    config.cssDist + '/*',
+    config.jsDist + '/*',
+    config.cssStaticDest + '/*',
+    config.jsStaticDest + '/js/*'
   ], {force: true} , callBack);
 });
 
 gulp.task('css', function() {
   gulp.src('./scss/main.scss')
     .pipe(sass())
-    .pipe(gulp.dest(config.dist + '/css'))
+    .pipe(gulp.dest(config.cssDist))
     .pipe(minifyCss())
     .pipe(rename('main.min.css'))
-    .pipe(gulp.dest(config.staticDest + '/css'));
+    .pipe(gulp.dest(config.cssStaticDest));
 });
 
-gulp.task('requirejs', function() {
-  rjs(rjsConfig);
+gulp.task('requirejs', shell.task(['r.js -o require.build.js']));
 
+gulp.task('copyjs', function() {
+  gulp.src(config.jsDist + '/banda.js')
+    .pipe(gulp.dest(config.jsStaticDest));
+  
+  gulp.src(config.jsDist + '/entrypoint.js')
+    .pipe(gulp.dest(config.jsStaticDest));
+  
+  gulp.src(config.jsDist + '/views/*')
+    .pipe(gulp.dest(config.jsStaticDest + '/views'));
+  
+  gulp.src(config.jsSrc + '/lib/bootstrap-modal-3.3.4.js')
+    .pipe(uglify())
+    .pipe(rename('bootstrap-modal.min.js'))
+    .pipe(gulp.dest(config.jsStaticDest + '/lib'));
+  
+  gulp.src(config.jsSrc + '/lib/echo-1.7.0.js')
+    .pipe(uglify())
+    .pipe(rename('echo.min.js'))
+    .pipe(gulp.dest(config.jsStaticDest + '/lib'));
+  
 });
 
-
-
-
-gulp.task('default', ['clean', 'css']);
+gulp.task('js', ['requirejs', 'copyjs']);
+gulp.task('default', ['clean', 'css', 'js']);
