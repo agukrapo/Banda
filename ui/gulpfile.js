@@ -24,7 +24,7 @@ gulp.task('clean', function (callBack) {
   ], {force: true} , callBack);
 });
 
-gulp.task('css', function() {
+gulp.task('css', ['clean'], function() {
   gulp.src('./scss/main.scss')
     .pipe(sass())
     .pipe(gulp.dest(config.cssDist))
@@ -57,5 +57,5 @@ gulp.task('copyjs', ['requirejs'], function() {
   
 });
 
-gulp.task('js', ['requirejs', 'copyjs']);
+gulp.task('js', ['clean', 'requirejs', 'copyjs']);
 gulp.task('default', ['clean', 'css', 'js']);
