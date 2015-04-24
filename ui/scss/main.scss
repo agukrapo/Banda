@@ -7,6 +7,10 @@ body {
   overflow: hidden;
 }
 
+a {
+  text-decoration: none;  
+}
+
 #loader {
   position: fixed;
   z-index: 2000;
