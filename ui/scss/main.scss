@@ -53,10 +53,6 @@ section {
   display: none;
 }
 
-.cancion {
-  margin-bottom: 0px;
-}
-
 .center {
   position: absolute;
   top: 50%;
@@ -70,11 +66,34 @@ footer {
 
 .container {
 /*   height: 100%; */
-
   @include outer-container;
-  
+
   .page-header {
-    margin-top: 80px;  
+    margin-top: 80px;
+    @include span-columns(12);  
   } 
+
+  .text { 
+    @include span-columns(12); 
+  }
+  
+  .cover, .album-info {
+    @include span-columns(6);
+  }
+
+  .img-responsive {
+    max-width:100%;
+    height:auto;
+  }
+
+  .thumbnail {
+  
+  
+  }
+  
+  .cancion {
+    margin: 5px 0;
+  }
+
 }
 
