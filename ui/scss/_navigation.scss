@@ -7,7 +7,7 @@
   left: 0;
   
   ul { 
-    margin: 0 auto; 
+    margin-top: 0; 
     padding: 20px 30px;
     list-style: none;
     background-color: black;
@@ -29,6 +29,7 @@
     color: #fff; /* IE8 proofing */
     color: rgba(255, 255, 255, .75);
     border-bottom: 2px solid transparent;
+    text-decoration: none;  
   }
   
   a:hover, a:focus {

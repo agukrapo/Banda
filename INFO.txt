@@ -3,6 +3,8 @@ http://sqlitestudio.pl/
 http://dimsemenov.com/plugins/magnific-popup/
 
 http://www.hostinger.se/
+
+https://developers.google.com/speed/pagespeed/
 ============================
 TODO
 ----------

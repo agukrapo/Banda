@@ -1,6 +1,7 @@
+@import "bourbon/bourbon";
+@import "neat/neat";
 @import "normalize";
 @import "navigation";
-
 
 /* main styles */
 body {
@@ -9,6 +10,10 @@ body {
 
 a {
   text-decoration: none;  
+}
+
+a:hover {
+  text-decoration: underline;  
 }
 
 #loader {
@@ -44,16 +49,8 @@ section {
   width: 100%;
 }
 
-.container {
-  height: 100%;
-}
-
 .help-block {
   display: none;
-}
-
-.page-header {
-  border-bottom: none;
 }
 
 .cancion {
@@ -70,3 +67,14 @@ section {
 footer {
   margin-bottom: 20px;
 }
+
+.container {
+/*   height: 100%; */
+
+  @include outer-container;
+  
+  .page-header {
+    margin-top: 80px;  
+  } 
+}
+
