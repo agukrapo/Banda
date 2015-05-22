@@ -1,39 +1,28 @@
 
 <div class="container">
-  <header class="page-header">
-    <h1>Fotos</h1>
-  </header>
+<%_.forEach(data.models, function (foto, i) {%> 
 
-  <%_.forEach(data.models, function (foto, i) {%> 
-    <%if (i % 4 === 0) {%>
-  <div class="row">
-    <%}%>
-
-    <div class="col-md-3">
-      <a id="<%=i%>" class="foto thumbnail" href="#"> 
-        <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=foto.get('thumbnail')%>" alt="<%=foto.get('descripcion')%>">
-      </a>
-    </div>
-
-    <%if (i % 4 === 3 || i === (data.length - 1)) {%>
+  <div class="fourth">
+    <a id="<%=i%>" class="foto thumbnail" href="#"> 
+      <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=foto.get('thumbnail')%>" alt="<%=foto.get('descripcion')%>">
+    </a>
   </div>
-    <% } %> 
-  <% }) %> 
+
+<% }) %> 
   
   <div id="modal-foto" class="modal" tabindex="-1"></div>
-  
-  <%if (data.hasPrevious() || data.hasNext()) {%>
-  <footer class="row">
-    <div class="col-md-6">
-      <%if (data.hasPrevious()) {%>
-      <button id="previous-fotos-page" class="btn btn-default pull-left">Fotos M&aacute;s Nuevas</button>
-      <% } %>
-    </div>
-    <div class="col-md-6">
-      <%if (data.hasNext()) {%>
-      <button id="next-fotos-page" class="btn btn-default pull-right">Fotos M&aacute;s Viejas</button>
-      <% } %>
-    </div>
-  </footer>
-  <% } %>
 </div>
+  
+<%if (data.hasPrevious() || data.hasNext()) {%>
+<footer class="container">
+
+  <%if (data.hasPrevious()) {%>
+  <button id="previous-fotos-page" class="pull-left">Fotos M&aacute;s Nuevas</button>
+  <% } %>
+
+  <%if (data.hasNext()) {%>
+  <button id="next-fotos-page" class="pull-right">Fotos M&aacute;s Viejas</button>
+  <% } %>
+
+</footer>
+<% } %>

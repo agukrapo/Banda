@@ -1,45 +1,43 @@
-#navigation {
-  height: 40px;
-  width: 100%;
-  font-weight: bold;
-  position: fixed;
-  top: 0;
-  left: 0;
-  
-  ul { 
-    margin-top: 0; 
-    padding: 20px 30px;
-    list-style: none;
+#page-header {
     background-color: black;
     opacity: 0.6;
     filter: alpha(opacity = 60);
     box-shadow: 1px 1px 50px;
-    padding: 20px 30px;
-  }
+    padding: 15px 0;
+  
+  nav {
+    @include outer-container;
 
-  li {
-    display: inline-block;
-    margin-right: 10px;
-  }
-
-  a {
-    padding: 5px;
-    font-size: 16px;
     font-weight: bold;
-    color: #fff; /* IE8 proofing */
-    color: rgba(255, 255, 255, .75);
-    border-bottom: 2px solid transparent;
-    text-decoration: none;  
-  }
+    
+    ul { 
+      margin-top: 0; 
+    }
   
-  a:hover, a:focus {
-    background-color: transparent;
-    border-bottom-color: rgba(255, 255, 255, .25);
-  }
+    li {
+      display: inline-block;
+      margin-right: 10px;
+    }
   
-  .active > a, .active > a:hover, .active > a:focus  {
-    color: white;
-    border-bottom-color: white;
+    a {
+      padding: 5px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #fff; /* IE8 proofing */
+      color: rgba(255, 255, 255, .75);
+      border-bottom: 2px solid transparent;
+      text-decoration: none;  
+    }
+    
+    a:hover, a:focus {
+      background-color: transparent;
+      border-bottom-color: rgba(255, 255, 255, .25);
+    }
+    
+    .active > a, .active > a:hover, .active > a:focus  {
+      color: white;
+      border-bottom-color: white;
+    }
+    
   }
-  
 }

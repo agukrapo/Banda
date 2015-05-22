@@ -1,15 +1,13 @@
 @import "bourbon/bourbon";
+@import "base/base";
 @import "neat/neat";
+
 @import "normalize";
 @import "navigation";
 
 /* main styles */
 body {
   overflow: hidden;
-}
-
-a {
-  text-decoration: none;  
 }
 
 a:hover {
@@ -36,14 +34,6 @@ a:hover {
   max-width: 90%;
 }
 
-#page-header {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: 100%;
-  z-index: 1010;
-}
-
 section {
   overflow: auto;
   width: 100%;
@@ -60,40 +50,53 @@ section {
   transform: translate(-50%, -50%);
 }
 
-footer {
-  margin-bottom: 20px;
-}
-
 .container {
-/*   height: 100%; */
   @include outer-container;
+  
+  margin-top: 40px;
+  margin-bottom: 20px;
 
-  .page-header {
-    margin-top: 80px;
-    @include span-columns(12);  
-  } 
-
-  .text { 
+  .whole { 
     @include span-columns(12); 
   }
   
-  .cover, .album-info {
+  .half {
     @include span-columns(6);
+    margin-bottom: 20px;
+  }
+  
+  .third {
+    @include span-columns(4);
+    @include omega(3n);
+    margin-bottom: 20px;
+  }
+  
+  .fourth {
+    @include span-columns(3);
+    @include omega(4n);
+    margin-bottom: 20px;
   }
 
   .img-responsive {
     max-width:100%;
     height:auto;
   }
-
-  .thumbnail {
-  
-  
-  }
   
   .cancion {
     margin: 5px 0;
   }
+  
+  ol {
+    @extend %default-ol;
+  }
 
+}
+
+.pull-right {
+  float: right !important;
+}
+
+.pull-left {
+  float: left !important;
 }
 
