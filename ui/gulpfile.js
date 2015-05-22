@@ -45,9 +45,9 @@ gulp.task('copyjs', ['requirejs'], function() {
   gulp.src(config.jsDist + '/views/*')
     .pipe(gulp.dest(config.jsStaticDest + '/views'));
   
-  gulp.src(config.jsSrc + '/lib/bootstrap-modal-3.3.4.js')
+  gulp.src(config.jsSrc + '/lib/magnific-popup-1.0.0.js')
     .pipe(uglify())
-    .pipe(rename('bootstrap-modal.min.js'))
+    .pipe(rename('magnific-popup.min.js'))
     .pipe(gulp.dest(config.jsStaticDest + '/lib'));
   
   gulp.src(config.jsSrc + '/lib/echo-1.7.0.js')

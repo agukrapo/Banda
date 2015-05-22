@@ -1,5 +1,5 @@
 define([ 'jquery', 
-         'bootstrapmodal', 
+         'modal', 
          'text!template/error.html' 
        ], function($, Modal, template) {
     

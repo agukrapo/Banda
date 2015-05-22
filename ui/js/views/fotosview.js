@@ -1,6 +1,6 @@
 define([ 'underscore', 
          'echo',
-         'bootstrapmodal',
+         'modal',
          'useragent',
          'views/collectionview',
          'views/fotoview',

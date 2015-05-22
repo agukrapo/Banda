@@ -1,7 +1,7 @@
 define([ 'jquery',
          'underscore', 
          'backbone',
-         'bootstrapmodal',
+         'modal',
          'models/comentario',
          'text!template/comentarioform.html'
        ], function($, _, Backbone, Modal, Comentario, comentarioFormTemplate) {

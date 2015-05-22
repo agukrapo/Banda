@@ -1,9 +1,9 @@
 #page-header {
-    background-color: black;
-    opacity: 0.6;
-    filter: alpha(opacity = 60);
-    box-shadow: 1px 1px 50px;
-    padding: 15px 0;
+  background-color: black;
+  opacity: 0.6;
+  filter: alpha(opacity = 60);
+  box-shadow: 1px 1px 50px;
+  padding: 15px 0;
   
   nav {
     @include outer-container;
@@ -11,7 +11,8 @@
     font-weight: bold;
     
     ul { 
-      margin-top: 0; 
+      margin: 0;
+      padding: 0;
     }
   
     li {

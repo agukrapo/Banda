@@ -4,7 +4,7 @@
     jquery : 'empty:',
     underscore : 'empty:',
     backbone : 'empty:',
-    bootstrapmodal : 'empty:',
+    modal : 'empty:',
     echo : 'empty:',
     backstretch : 'empty:',
   },

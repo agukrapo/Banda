@@ -4,7 +4,7 @@ define([ 'jquery',
          'text!template/videoiframe.html'
        ], function($, _, Backbone, template) {
 
-  return VideoIframe = Backbone.View.extend({
+  return Backbone.View.extend({
     el: '#modal-video',
     template: _.template(template),
     render: function() {

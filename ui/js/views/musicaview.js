@@ -1,6 +1,6 @@
 define([ 'underscore', 
          'echo',
-         'bootstrapmodal',
+         'modal',
          'views/collectionview',
          'collections/musica',
          'text!template/musica.html'
