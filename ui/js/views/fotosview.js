@@ -13,8 +13,8 @@ define([ 'underscore',
     template: _.template(template),
     events: {
       'click .foto': 'openModal',
-      "click #next-fotos-page": "nextPage",
-      "click #previous-fotos-page": "previousPage"
+      'click #next-fotos-page': 'nextPage',
+      'click #previous-fotos-page': 'previousPage'
     },
     afterRender:function() {
       Echo.init();
