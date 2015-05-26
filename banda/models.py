@@ -88,12 +88,12 @@ class Presentacion(models.Model):
         }
 
 class Foto(models.Model):
+    nombre = models.CharField(max_length=100)
     imagen = ImageField(upload_to='img/%Y/%m/%d')
-    descripcion = models.TextField(max_length=1000, blank=True)
     fecha = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return self.descripcion + ' - ' + datetimeToString(self.fecha)
+        return self.nombre + ' - ' + datetimeToString(self.fecha)
 
     class Meta:
         ordering = ('-fecha',)
@@ -105,7 +105,7 @@ class Foto(models.Model):
             'width': self.imagen.width,
             'height': self.imagen.height,
             'thumbnail': get_thumbnail(self.imagen, '253x200', crop='center', quality=99).url,
-            'descripcion': self.descripcion,
+            'nombre': self.nombre,
         }
 
 class Fondos(SingletonModel):
@@ -179,7 +179,6 @@ class Nosotros(SingletonModel):
 
 class Video(models.Model):
     nombre = models.CharField(max_length=100)
-    descripcion = models.TextField(max_length=1000, blank=True)
     url = models.URLField(help_text='solamente youtube')
     fecha = models.DateTimeField(auto_now_add=True)
 
@@ -192,7 +191,6 @@ class Video(models.Model):
     def serialize(self):
         return {
             'nombre': self.nombre,
-            'descripcion': self.descripcion,
             'url': self.url,
         }
 

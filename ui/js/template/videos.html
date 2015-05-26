@@ -3,7 +3,7 @@
   <%_.forEach(data.models, function (video, i) {%>
 
   <div class="third">
-    <a id="<%=i%>" class="video thumbnail" href="#"> 
+    <a id="<%=i%>" class="video thumbnail" href="#" title="<%=video.get('nombre')%>"> 
       <img src="/static/img/img_load.gif" class="img-responsive" alt="<%=video.get('nombre')%>" data-echo="<%=video.get('thumbnail')%>">
     </a>
   </div>

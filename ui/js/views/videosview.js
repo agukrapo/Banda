@@ -3,10 +3,10 @@ define([ 'underscore',
          'modal',
          'useragent',
          'views/collectionview',
-         'views/videoiframe',
+         'views/videoview',
          'collections/videos',
          'text!template/videos.html'
-       ], function(_, Echo, Modal, userAgent, CollectionView, Iframe, videos, template) {
+       ], function(_, Echo, Modal, userAgent, CollectionView, VideoView, videos, template) {
 
   var VideosView = CollectionView.extend({
     data: videos,
@@ -24,9 +24,9 @@ define([ 'underscore',
       if (userAgent.isMobile()) {
         window.location = video.get('url');
       } else {
-        var iframe = new Iframe();
-        iframe.model = video;
-        iframe.render();
+        var videoView = new VideoView();
+        videoView.model = video;
+        videoView.render();
       }
       event.preventDefault();
     }

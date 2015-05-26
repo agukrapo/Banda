@@ -3,14 +3,14 @@
 <%_.forEach(data.models, function (foto, i) {%> 
 
   <div class="fourth">
-    <a id="<%=i%>" class="foto thumbnail" href="#"> 
-      <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=foto.get('thumbnail')%>" alt="<%=foto.get('descripcion')%>">
+    <a id="<%=i%>" class="foto thumbnail" href="#" title="<%=foto.get('nombre')%>"> 
+      <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=foto.get('thumbnail')%>" alt="<%=foto.get('nombre')%>">
     </a>
   </div>
 
 <% }) %> 
   
-  <div id="modal-foto" class="modal" tabindex="-1"></div>
+  <div id="modal-foto"></div>
 </div>
   
 <%if (data.hasPrevious() || data.hasNext()) {%>

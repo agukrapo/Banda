@@ -4,6 +4,7 @@
 
 @import "normalize";
 @import "navigation";
+@import "grid";
 
 @import "magnific-popup/main";
 
@@ -52,56 +53,28 @@ section {
   transform: translate(-50%, -50%);
 }
 
-.container {
-  @include outer-container;
-  
-  margin-top: 40px;
-  margin-bottom: 20px;
+.img-responsive {
+  max-width:100%;
+  height:auto;
+}
 
-  .whole { 
-    @include span-columns(12); 
-  }
-  
-  .half {
-    @include span-columns(6);
-    margin-bottom: 20px;
-  }
-  
-  .third {
-    @include span-columns(4);
-    @include omega(3n);
-    margin-bottom: 20px;
-  }
-  
-  .fourth {
-    @include span-columns(3);
-    @include omega(4n);
-    margin-bottom: 20px;
-  }
+.thumbnail {
+  opacity: 0.6;
+  transition: all 0.5s ease;
+}
 
-  .img-responsive {
-    max-width:100%;
-    height:auto;
-  }
-  
-  .thumbnail {
-    opacity: 0.6;
-    transition: all 0.5s ease;
-  }
-  
-  .thumbnail:hover {
-    opacity:1;
-    transition: all 0.5s ease;
-  }
-  
-  .cancion {
-    margin: 5px 0;
-  }
-  
-  ol {
-    @extend %default-ol;
-  }
+.thumbnail:hover {
+  opacity: 1;
+  transition: all 0.5s ease;
 
+}
+
+.cancion {
+  margin: 5px 0;
+}
+
+ol {
+  @extend %default-ol;
 }
 
 .pull-right {
