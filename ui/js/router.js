@@ -70,15 +70,20 @@ define([ 'jquery',
     },
     setFondo: function(section) {
       var src = fondos.get(section)
-      var fondo = new Image();
-      fondo.src = src;
-      
-      fondo.onload = Loader.hide;
-      if (fondo.complete) {
+      if (src) {
+        var fondo = new Image();
+        fondo.src = src;
+        
+        fondo.onload = Loader.hide;
+        if (fondo.complete) {
+          Loader.hide();
+        }
+        
+        $('body').backstretch(src);
+      } else {
+        $(':backstretch').data('backstretch') && $(':backstretch').data('backstretch').destroy();
         Loader.hide();
       }
-      
-      $('body').backstretch(src);
     }
     
   });

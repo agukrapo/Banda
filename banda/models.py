@@ -110,14 +110,14 @@ class Foto(models.Model):
 
 class Fondos(SingletonModel):
     logo = models.ImageField(upload_to='img/fondos')
-    inicio = models.ImageField(upload_to='img/fondos')
-    nosotros = models.ImageField(upload_to='img/fondos')
-    musica = models.ImageField(upload_to='img/fondos')
-    videos = models.ImageField(upload_to='img/fondos')
-    fotos = models.ImageField(upload_to='img/fondos')
-    muro = models.ImageField(upload_to='img/fondos')
-    presentaciones = models.ImageField(upload_to='img/fondos')
-    contacto = models.ImageField(upload_to='img/fondos')
+    inicio = models.ImageField(upload_to='img/fondos', blank=True)
+    nosotros = models.ImageField(upload_to='img/fondos', blank=True)
+    musica = models.ImageField(upload_to='img/fondos', blank=True)
+    videos = models.ImageField(upload_to='img/fondos', blank=True)
+    fotos = models.ImageField(upload_to='img/fondos', blank=True)
+    muro = models.ImageField(upload_to='img/fondos', blank=True)
+    presentaciones = models.ImageField(upload_to='img/fondos', blank=True)
+    contacto = models.ImageField(upload_to='img/fondos', blank=True)
 
     class Meta:
         verbose_name = "Fondos"
@@ -126,14 +126,14 @@ class Fondos(SingletonModel):
     def serialize(self):
         return {
             'logo': self.logo.url,
-            'inicio': self.inicio.url,
-            'nosotros': self.nosotros.url,
-            'musica': self.musica.url,
-            'videos': self.videos.url,
-            'fotos': self.fotos.url,
-            'muro': self.muro.url,
-            'presentaciones': self.presentaciones.url,
-            'contacto': self.contacto.url,
+            'inicio': self.inicio.url if self.inicio else None,
+            'nosotros': self.nosotros.url if self.nosotros else None,
+            'musica': self.musica.url if self.musica else None,
+            'videos': self.videos.url if self.videos else None,
+            'fotos': self.fotos.url if self.fotos else None,
+            'muro': self.muro.url if self.muro else None,
+            'presentaciones': self.presentaciones.url if self.presentaciones else None,
+            'contacto': self.contacto.url if self.contacto else None,
         }
 
 class Secciones(SingletonModel):
