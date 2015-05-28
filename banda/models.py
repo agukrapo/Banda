@@ -44,6 +44,7 @@ class Cancion(models.Model):
 
 class Album(models.Model):
     nombre = models.CharField(max_length=100)
+    artista = models.CharField(max_length=100, blank=True)
     lanzamiento = models.DateField(blank=True)
     tapa = models.ImageField(upload_to='img/tapas')
     descripcion = models.TextField(max_length=1000, blank=True)
@@ -57,8 +58,9 @@ class Album(models.Model):
 
     def serialize(self):
         return {
+            'artista': self.artista,
             'nombre': self.nombre,
-            'lanzamiento': self.lanzamiento,
+            'lanzamiento': dateToString(self.lanzamiento),
             'tapa': self.tapa.url,
             'canciones': self.canciones.all(),
             'descripcion': self.descripcion,

@@ -1,27 +1,56 @@
+/* $max-width: em(1024); */
+
+$mobile: new-breakpoint(max-width 480px 4);
+
+
 .container {
   @include outer-container;
-  
-  margin-top: 40px;
   margin-bottom: 20px;
 
   .whole { 
-    @include span-columns(12); 
+    @include span-columns(12);
+    @include omega(1n);
+    @include media($mobile) {
+      @include span-columns(4);
+      @include omega(1n);
+    }
+    
+    margin-bottom: 20px;
   }
   
   .half {
     @include span-columns(6);
+    @include omega(2n);
+    
+    @include media($mobile) {
+      @include span-columns(4);
+      @include omega(1n);
+    }
+    
     margin-bottom: 20px;
   }
   
   .third {
     @include span-columns(4);
     @include omega(3n);
+    
+    @include media($mobile) {
+      @include span-columns(4);
+      @include omega(1n);
+    }
+    
     margin-bottom: 20px;
   }
   
   .fourth {
     @include span-columns(3);
     @include omega(4n);
+    
+    @include media($mobile) {
+      @include span-columns(4);
+      @include omega(1n);
+    }    
+    
     margin-bottom: 20px;
   }
 }

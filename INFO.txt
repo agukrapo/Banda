@@ -11,3 +11,6 @@ TODO
 !Fonts
 !fotos modal tamaño
 
+Musica -> Album rework
+album canciones widget
+GRID in mobile

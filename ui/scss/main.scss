@@ -1,21 +1,20 @@
 @import "bourbon/bourbon";
-@import "base/base";
+
+$mobile: new-breakpoint(max-width 480px 4);
+
 @import "neat/neat";
 
 @import "normalize";
+
+@import "variables";
+@import "typography";
+@import "buttons";
 @import "navigation";
 @import "grid";
 
 @import "magnific-popup/main";
 
-/* main styles */
-body {
-  overflow: hidden;
-}
-
-a:hover {
-  text-decoration: underline;  
-}
+/*=================================*/
 
 #loader {
   position: fixed;
@@ -24,7 +23,7 @@ a:hover {
   left: 0px;
   height: 100%;
   width: 100%;
-  background-color: #333333;
+  background-color: $dark-gray;
 }
 
 #loading-message {
@@ -38,13 +37,14 @@ a:hover {
 }
 
 section {
-  overflow: auto;
+/*   overflow: auto; */
+  margin-top: 40px;
   width: 100%;
 }
 
-.help-block {
-  display: none;
-}
+/* .help-block { */
+/*   display: none; */
+/* } */
 
 .center {
   position: absolute;
@@ -60,21 +60,34 @@ section {
 
 .thumbnail {
   opacity: 0.6;
-  transition: all 0.5s ease;
+  transition: $default-transition;
+  
+  &:active, &:focus, &:hover {
+    opacity: 1;
+    transition: $default-transition;
+  }
 }
 
-.thumbnail:hover {
-  opacity: 1;
-  transition: all 0.5s ease;
-
-}
-
-.cancion {
-  margin: 5px 0;
-}
-
-ol {
-  @extend %default-ol;
+.album {
+  font-size: 90%;
+  
+  .descripcion {
+  }
+  
+  .lanzamiento {
+  }
+  
+  .canciones {
+    font-size: 90%;
+  }
+  
+  .cancion {
+    margin: 0;
+  }
+  
+  ol {
+    @extend %default-ol;
+  }
 }
 
 .pull-right {
@@ -83,5 +96,16 @@ ol {
 
 .pull-left {
   float: left !important;
+}
+
+.comentario {
+  .texto {
+    overflow: hidden;    
+    margin-bottom: 0;
+  }
+  
+  .autor {
+    font-size: 80%;
+  }
 }
 

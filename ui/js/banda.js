@@ -15,7 +15,7 @@ define([ 'jquery',
     });
 
     var resize = function() {
-      var windowHeight = $(window).height()
+      var windowHeight = $(window).height() - 100
       $('section').css('height', windowHeight + 'px');
       $(window).resize(function() {
         var windowHeight = $(window).height()
