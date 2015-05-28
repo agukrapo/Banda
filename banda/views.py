@@ -8,13 +8,6 @@ from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from banda.models import Fondos, Nosotros, Presentacion, Album, Video, Comentario, Foto, Contacto, Secciones
 
-
-@require_GET
-@require_AJAX
-@apply_restrictions_by_view_name
-def get_musica(request):
-    return HttpResponse(dumps(Album.objects.all()), content_type='application/json')
-
 @require_GET
 @require_AJAX
 @apply_restrictions_by_view_name
@@ -109,6 +102,13 @@ def get_fotos(request):
 def get_muro(request):
     muro = paginated_result(Comentario.objects.all(), request.GET.get('page', 1), request.GET.get('size', 10))
     return HttpResponse(dumps(muro), content_type='application/json')
+
+@require_GET
+@require_AJAX
+@apply_restrictions_by_view_name
+def get_musica(request):
+    musica = paginated_result(Album.objects.all(), request.GET.get('page', 1), request.GET.get('size', 4))
+    return HttpResponse(dumps(musica), content_type='application/json')
 
 @require_GET
 @require_AJAX

@@ -62,7 +62,7 @@ class Album(models.Model):
             'nombre': self.nombre,
             'lanzamiento': dateToString(self.lanzamiento),
             'tapa': self.tapa.url,
-            'canciones': self.canciones.all(),
+            #'canciones': self.canciones.all(),
             'descripcion': self.descripcion,
         }
 

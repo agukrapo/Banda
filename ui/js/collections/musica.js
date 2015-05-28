@@ -1,7 +1,8 @@
-define(['models/album', 'collections/basecollection'], function(Album, BaseCollection) {
-  var Musica = BaseCollection.extend({
+define(['models/album', 'collections/pagedcollection'], function(Album, PagedCollection) {
+  
+  var Musica = PagedCollection.extend({
     model: Album,
-    url: '/banda/musica/',
+    urlPart: '/banda/musica/',
   });
   
   return new Musica();

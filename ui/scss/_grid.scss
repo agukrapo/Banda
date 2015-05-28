@@ -10,6 +10,7 @@ $mobile: new-breakpoint(max-width 480px 4);
   .whole { 
     @include span-columns(12);
     @include omega(1n);
+    
     @include media($mobile) {
       @include span-columns(4);
       @include omega(1n);
