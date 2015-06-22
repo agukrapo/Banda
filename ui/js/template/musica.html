@@ -3,7 +3,7 @@
   <%_.forEach(data.models, function (album, i) {%>
 
   <div class="third">
-    <a id="<%=i%>" class="album thumbnail" href="#" title="<%=album.get('nombre')%>"> 
+    <a id="<%=i%>" class="album-thumbnail thumbnail" href="#" title="<%=album.get('nombre')%>"> 
       <img src="/static/img/img_load.gif" class="img-responsive" alt="<%=album.get('nombre')%>" data-echo="<%=album.get('tapa')%>">
     </a>
   </div>

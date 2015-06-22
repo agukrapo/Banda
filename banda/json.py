@@ -1,5 +1,8 @@
 from django.db.models.base import ModelBase
-from django.utils import simplejson
+try:
+    import simplejson
+except ImportError:
+    from django.utils import simplejson
 from django.utils.encoding import force_unicode
 
 def dumps(content, json_opts={}):
