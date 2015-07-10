@@ -13,6 +13,7 @@ TODO
 
 FORMULARIO
 album canciones widget
+error popup
 GRID in mobile
 contacto h1
 remover warnings
