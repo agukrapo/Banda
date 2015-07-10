@@ -4,7 +4,10 @@
 
   <div class="fourth">
     <a id="<%=i%>" class="foto thumbnail" href="<%=foto.get('url')%>" title="<%=foto.get('nombre')%>"> 
-      <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=foto.get('thumbnail')%>" alt="<%=foto.get('nombre')%>">
+      <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=foto.get('thumbnail')%>" alt="<%=foto.get('nombre')%>"></img>
+		  <div class="thumbnail-info">
+		  	<p><%=foto.get('nombre')%></p>
+		  </div>
     </a>
   </div>
 

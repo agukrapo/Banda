@@ -11,7 +11,8 @@ TODO
 !Fonts
 !fotos modal tamaño
 
-Musica -> Album rework
+FORMULARIO
+tapa album image size
 album canciones widget
 GRID in mobile
 contacto h1

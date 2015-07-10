@@ -37,14 +37,9 @@ $mobile: new-breakpoint(max-width 480px 4);
 }
 
 section {
-/*   overflow: auto; */
   margin-top: 40px;
   width: 100%;
 }
-
-/* .help-block { */
-/*   display: none; */
-/* } */
 
 .center {
   position: absolute;
@@ -59,14 +54,31 @@ section {
 }
 
 .thumbnail {
-  opacity: 0.6;
-  transition: $default-transition;
+  display: block;
+  position: relative;
   
-  &:active, &:focus, &:hover {
-    opacity: 1;
+  .thumbnail-info {
+	  color: white;
+	  position: absolute;
+	  background: rgba(51, 51, 51, 0.8);
+	  top: 0;
+	  text-align: center;
+	  width: 100%;
+
+	  visibility: hidden;
+	  opacity: 0;
+	  transition: $default-transition;
+  }
+  
+  &:active, &:focus, &:hover .thumbnail-info {
+    visibility:visible;
+    opacity:1;
     transition: $default-transition;
   }
 }
+
+
+
 
 .album {
   font-size: 90%;
@@ -113,4 +125,3 @@ section {
     font-size: 80%;
   }
 }
-

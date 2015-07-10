@@ -4,7 +4,7 @@ from django.db import models
 from singleton_models.models import SingletonModel
 from django.utils.http import urlquote
 from django.conf import settings
-from pytz import timezone # pip install pytz
+from pytz import timezone
 from sorl.thumbnail import ImageField
 from sorl.thumbnail.shortcuts import get_thumbnail
 
