@@ -4,8 +4,11 @@
 
   <div class="third">
     <a id="<%=i%>" class="album-thumbnail thumbnail" href="#" title="<%=album.get('nombre')%>"> 
-      <img src="/static/img/img_load.gif" class="img-responsive" alt="<%=album.get('nombre')%>" data-echo="<%=album.get('tapa')%>">
+      <img src="/static/img/img_load.gif" class="img-responsive" alt="<%=album.get('nombre')%>" data-echo="<%=album.get('thumbnail')%>">
       <div class="thumbnail-info">
+        <%if (album.get('artista')) {%>
+          <p><%=album.get('artista')%></p>
+        <% } %>
         <p><%=album.get('nombre')%></p>
       </div>
     </a>

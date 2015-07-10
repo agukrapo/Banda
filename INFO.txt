@@ -12,7 +12,7 @@ TODO
 !fotos modal tamaño
 
 FORMULARIO
-tapa album image size
 album canciones widget
 GRID in mobile
 contacto h1
+remover warnings

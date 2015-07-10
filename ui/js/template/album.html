@@ -3,21 +3,23 @@
 
   <div class="half">
     <img src="/static/img/img_load.gif" class="img-responsive" data-echo="<%=album.get('tapa')%>" alt="Tapa de <%=album.get('nombre')%>">
-    
   	<button class="volver" class="pull-left">Volver</button>
-
   </div>
 
   <div class="album half">
+    <%if (album.get('artista')) {%>
     <h1><%=album.get('artista')%></h1>
+    <% } %>
     
     <h2><%=album.get('nombre')%></h2>
     
     <p class="descripcion"><%=album.get('descripcion')%></p>
     
     <p class="lanzamiento">Lanzamiento: <%=album.get('lanzamiento')%></p>
-    
+
+    <h3>Lista de canciones</h2>    
     <ol class="canciones">
+
       <%_.forEach(album.get('canciones'), function (cancion, j) {%>
       
       <li>

@@ -64,6 +64,7 @@ class Album(models.Model):
             'tapa': self.tapa.url,
             'canciones': self.canciones.all(),
             'descripcion': self.descripcion,
+            'thumbnail': get_thumbnail(self.tapa, '480x360', crop='center', quality=80).url,
         }
 
 class Presentacion(models.Model):
@@ -106,7 +107,7 @@ class Foto(models.Model):
             'url': self.imagen.url,
             'width': self.imagen.width,
             'height': self.imagen.height,
-            'thumbnail': get_thumbnail(self.imagen, '253x200', crop='center', quality=99).url,
+            'thumbnail': get_thumbnail(self.imagen, '253x200', crop='center', quality=80).url,
             'nombre': self.nombre,
         }
 
