@@ -1,12 +1,11 @@
 define([ 'underscore', 
          'echo',
-         'modal',
          'useragent',
          'views/collectionview',
          'views/videoview',
          'collections/videos',
          'text!template/videos.html'
-       ], function(_, Echo, Modal, userAgent, CollectionView, VideoView, videos, template) {
+       ], function(_, Echo, userAgent, CollectionView, VideoView, videos, template) {
 
   var VideosView = CollectionView.extend({
     data: videos,
@@ -20,6 +19,7 @@ define([ 'underscore',
       Echo.init();
     },
     openModal: function(event) {
+      event.preventDefault();
       var video = this.data.models[event.currentTarget.id];
       if (userAgent.isMobile()) {
         window.location = video.get('url');
@@ -28,7 +28,6 @@ define([ 'underscore',
         videoView.model = video;
         videoView.render();
       }
-      event.preventDefault();
     }
   });
 

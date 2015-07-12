@@ -1,11 +1,11 @@
 define([ 'underscore', 
          'echo',
-         'modal',
+         'magnificpopup',
          'views/collectionview',
          'views/albumview',
          'collections/musica',
          'text!template/musica.html'
-       ], function(_, Echo, Modal, CollectionView, AlbumView, musica, template) {
+       ], function(_, Echo, magnificpopup, CollectionView, AlbumView, musica, template) {
   
   var MusicaView = CollectionView.extend({
     data: musica,

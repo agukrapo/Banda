@@ -1,12 +1,11 @@
 define([ 'underscore', 
          'echo',
-         'modal',
          'useragent',
          'views/collectionview',
          'views/fotoview',
          'collections/fotos',
          'text!template/fotos.html'
-       ], function(_, Echo, Modal, userAgent, CollectionView, FotoView, fotos, template) {
+       ], function(_, Echo, userAgent, CollectionView, FotoView, fotos, template) {
 
   var FotosView = CollectionView.extend({
     data: fotos,

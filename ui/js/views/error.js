@@ -1,18 +1,18 @@
 define([ 'jquery', 
-         'modal', 
+         'magnificpopup',
          'text!template/error.html' 
-       ], function($, Modal, template) {
+       ], function($, magnificpopup, template) {
     
   var Error = Backbone.View.extend({
     template: _.template(template),
-    initialize: function() {
-      this.render();
-    },
-    render: function() {
-      $('body').append(this.template())
-    },
     show: function() {
-      $('#error-msg-modal').modal();
+      var that = this;
+      $.magnificPopup.open({
+        items: {
+          type: 'inline',
+          src: that.template(),
+        }
+      });
     } 
   });
   

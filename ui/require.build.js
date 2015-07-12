@@ -4,7 +4,7 @@
     jquery : 'empty:',
     underscore : 'empty:',
     backbone : 'empty:',
-    modal : 'empty:',
+    magnificpopup : 'empty:',
     echo : 'empty:',
     backstretch : 'empty:',
   },

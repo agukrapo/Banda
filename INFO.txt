@@ -9,11 +9,9 @@ https://developers.google.com/speed/pagespeed/
 TODO
 ----------
 !Fonts
-!fotos modal tamaño
 
 FORMULARIO
 album canciones widget
-error popup
 GRID in mobile
 contacto h1
 remover warnings

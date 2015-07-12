@@ -1,15 +1,14 @@
 define([ 'jquery',
-         'underscore', 
+         'underscore',
+         'magnificpopup',
          'backbone',
          'echo',
-       ], function($, _, Backbone, Echo) {
+       ], function($, _, magnificpopup, Backbone, Echo) {
 
   return Backbone.View.extend({
-    el: '#modal-foto',
     render: function() {
-     
       var that = this;
-      this.$el.magnificPopup({
+      $.magnificPopup.open({
         items: {
             src: that.model.get('url')
         },
@@ -20,7 +19,7 @@ define([ 'jquery',
             return that.model.get('nombre');
           }
         }
-      }).magnificPopup('open');
+      });
       
       Echo.init();
     },

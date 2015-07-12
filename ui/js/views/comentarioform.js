@@ -1,10 +1,10 @@
 define([ 'jquery',
          'underscore', 
          'backbone',
-         'modal',
+         'magnificpopup',
          'models/comentario',
          'text!template/comentarioform.html'
-       ], function($, _, Backbone, Modal, Comentario, comentarioFormTemplate) {
+       ], function($, _, Backbone, magnificpopup, Comentario, comentarioFormTemplate) {
 
   var ComentarioForm = Backbone.View.extend({
     template: _.template(comentarioFormTemplate),

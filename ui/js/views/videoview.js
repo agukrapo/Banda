@@ -1,13 +1,13 @@
 define([ 'jquery',
-         'underscore', 
+         'underscore',
+         'magnificpopup',
          'backbone',
-       ], function($, _, Backbone, template) {
+       ], function($, _, magnificpopup, Backbone, template) {
 
   return Backbone.View.extend({
-    el: '#modal-video',
     render: function() {
       var that = this;
-      this.$el.magnificPopup({
+      $.magnificPopup.open({
         items: {
             src: that.model.get('url')
         },
@@ -25,7 +25,7 @@ define([ 'jquery',
             }
           }
         }
-      }).magnificPopup('open');
+      });
     },
   });
 });
