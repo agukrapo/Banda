@@ -23,28 +23,15 @@
       <%_.forEach(album.get('canciones'), function (cancion, j) {%>
       
       <li>
-        <% if (cancion.url && cancion.url.contains('soundcloud')) { %> 
-        <a class="cancion" href="#" data-toggle="modal" data-target="#songModal<%=j%>"> <%=cancion.nombre%> </a> 
-        <% } else if (cancion.url) { %> 
+        <% if (cancion.url) { %> 
         <a class="cancion" href="<%=decodeURIComponent(cancion.url)%>"> <%=cancion.nombre%> </a> 
+        
         <% } else { %>
         <p class="cancion"><%=cancion.nombre%></p> 
         <% } %>
       </li> 
-      
-      <% if (cancion.url && cancion.url.contains('soundcloud')) { %>
-      
-      <div class="modal" id="songModal<%=j%>" tabindex="-1">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-body">
-              <iframe width="558" src="//w.soundcloud.com/player/?url=<%=cancion.url%>" frameborder="0" allowfullscreen></iframe>
-            </div>
-          </div>
-        </div>
-      </div>
-      
-      <% } %> <%})%>
+ 
+      <%})%>
     </ol>
   </div>
 

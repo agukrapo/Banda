@@ -19,6 +19,7 @@ define([ 'underscore',
       Echo.init();
     },
     openModal: function(event) {
+      event.preventDefault();
       var foto = this.data.models[event.currentTarget.id];
       if (userAgent.isMobile()) {
         window.location = foto.get('url');
@@ -27,7 +28,6 @@ define([ 'underscore',
         fotoView.model = foto;
         fotoView.render();
       }
-      event.preventDefault();
     }
   });
   

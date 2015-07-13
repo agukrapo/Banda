@@ -19,13 +19,11 @@ define([ 'underscore',
       Echo.init();
     },
     openAlbum: function(event) {
-      var album = this.data.models[event.currentTarget.id];
-
-      var albumView = new AlbumView();
-      albumView.data = album;
-      albumView.render();
-      
       event.preventDefault();
+      
+      var albumView = new AlbumView();
+      albumView.data = this.data.models[event.currentTarget.id];
+      albumView.render();
     }
   });
   

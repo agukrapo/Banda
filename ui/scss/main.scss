@@ -128,8 +128,15 @@ section {
 
 .popup-base {
 	position: relative;
+  margin: 20px auto;
+}
+
+.error-popup {
   background: white;
   padding: 20px;
-  margin: 20px auto;
   max-width: 500px;
+}
+
+.soundcloud-player {
+	width: 558px;
 }

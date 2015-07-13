@@ -10,8 +10,10 @@ TODO
 ----------
 !Fonts
 
-FORMULARIO
-album canciones widget
-GRID in mobile
 contacto h1
+volver de album a musica sin loader
+GRID in mobile
+FORMULARIO
 remover warnings
+close button in error and cacnion popup
+canciones youtube

@@ -28,7 +28,6 @@ define([ 'jquery',
 
   return {
     begin: function() {
-      //console.log('banda begun');
     }
   };
 });
