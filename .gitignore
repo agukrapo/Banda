@@ -12,7 +12,16 @@ var
 sdist
 develop-eggs
 .installed.cfg
- 
+
+# virtualenv
+venv
+env
+VENV
+ENV
+
+# ides
+.idea
+
 # logs
 pip-log.txt
 *.log

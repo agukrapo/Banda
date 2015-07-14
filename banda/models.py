@@ -12,17 +12,21 @@ DATE_FORMAT = "d \d\e F \d\e Y"
 TIME_FORMAT = "%H:%M hs."
 DATETIME_FORMAT = "d \d\e F \d\e Y, H:i \h\s."
 
-def dateToString(date):
+
+def date_to_string(date):
     if isinstance(date, datetime.date):
         return _date(date, DATE_FORMAT)
 
-def datetimeToString(date):
+
+def datetime_to_string(date):
     if isinstance(date, datetime.datetime):
         return _date(date.astimezone(timezone(settings.TIME_ZONE)), DATETIME_FORMAT)
 
-def timeToString(time):
+
+def time_to_string(time):
     if isinstance(time, datetime.time):
         return time.strftime(TIME_FORMAT)
+
 
 class Cancion(models.Model):
     nombre = models.CharField(max_length=100)
@@ -60,7 +64,7 @@ class Album(models.Model):
         return {
             'artista': self.artista,
             'nombre': self.nombre,
-            'lanzamiento': dateToString(self.lanzamiento),
+            'lanzamiento': date_to_string(self.lanzamiento),
             'tapa': self.tapa.url,
             'canciones': self.canciones.all(),
             'descripcion': self.descripcion,
@@ -75,7 +79,7 @@ class Presentacion(models.Model):
     hora = models.TimeField()
 
     def __unicode__(self):
-        return self.lugar + ' - ' + dateToString(self.fecha) + ', ' + timeToString(self.hora)
+        return self.lugar + ' - ' + date_to_string(self.fecha) + ', ' + time_to_string(self.hora)
 
     class Meta:
         ordering = ('fecha',)
@@ -86,9 +90,10 @@ class Presentacion(models.Model):
             'lugar': self.lugar,
             'direccion': self.direccion,
             'descripcion': self.descripcion,
-            'fecha': dateToString(self.fecha),
-            'hora': timeToString(self.hora),
+            'fecha': date_to_string(self.fecha),
+            'hora': time_to_string(self.hora),
         }
+
 
 class Foto(models.Model):
     nombre = models.CharField(max_length=100)
@@ -96,20 +101,21 @@ class Foto(models.Model):
     fecha = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return self.nombre + ' - ' + datetimeToString(self.fecha)
+        return self.nombre + ' - ' + datetime_to_string(self.fecha)
 
     class Meta:
         ordering = ('-fecha',)
 
     def serialize(self):
         return {
-            'fecha': datetimeToString(self.fecha),
+            'fecha': datetime_to_string(self.fecha),
             'url': self.imagen.url,
             'width': self.imagen.width,
             'height': self.imagen.height,
             'thumbnail': get_thumbnail(self.imagen, '253x200', crop='center', quality=80).url,
             'nombre': self.nombre,
         }
+
 
 class Fondos(SingletonModel):
     logo = models.ImageField(upload_to='img/fondos')
@@ -139,6 +145,7 @@ class Fondos(SingletonModel):
             'contacto': self.contacto.url if self.contacto else None,
         }
 
+
 class Secciones(SingletonModel):
     inicio_habilitado = models.BooleanField(default=True)
     nosotros_habilitado = models.BooleanField(default=False)
@@ -165,6 +172,7 @@ class Secciones(SingletonModel):
             'contacto': self.contacto_habilitado,
         }
 
+
 class Nosotros(SingletonModel):
     texto = models.TextField(max_length=900000)
 
@@ -179,6 +187,7 @@ class Nosotros(SingletonModel):
         return {
             'texto': self.texto,
         }
+
 
 class Video(models.Model):
     nombre = models.CharField(max_length=100)
@@ -197,13 +206,14 @@ class Video(models.Model):
             'url': self.url,
         }
 
+
 class Comentario(models.Model):
     autor = models.CharField(max_length=100)
     texto = models.TextField(max_length=2000)
     fecha = models.DateTimeField(auto_now_add=True)
 
     def __unicode__(self):
-        return self.autor + ' - ' + datetimeToString(self.fecha)
+        return self.autor + ' - ' + datetime_to_string(self.fecha)
 
     class Meta:
         ordering = ('-fecha',)
@@ -213,8 +223,9 @@ class Comentario(models.Model):
         return {
             'autor': self.autor,
             'texto': self.texto,
-            'fecha': datetimeToString(self.fecha),
+            'fecha': datetime_to_string(self.fecha),
         }
+
 
 class Contacto(SingletonModel):
     texto = models.TextField(max_length=900000)
