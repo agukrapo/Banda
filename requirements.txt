@@ -9,4 +9,5 @@ sorl-thumbnail==12.3
 whitenoise==2.0.2
 -e git+https://github.com/ionata/django-singletons.git#egg=django_singletons
 pytz==2015.4
-mock
+mock==1.1.3
+psycopg2==2.6.1

@@ -1,13 +1,3 @@
-"""
-Django settings for paginabanda project.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/1.6/topics/settings/
-
-For the full list of settings and their values, see
-https://docs.djangoproject.com/en/1.6/ref/settings/
-"""
-
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
@@ -35,7 +25,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'singleton_models',
     'sorl.thumbnail',
-	'banda',
+    'banda',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -53,17 +43,28 @@ WSGI_APPLICATION = 'paginabanda.wsgi.application'
 
 
 # Database
-# https://docs.djangoproject.com/en/1.6/ref/settings/#databases
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'd8ov7sijd7dcn0',
+        'USER': 'jhuusaxauuxznt',
+        'PASSWORD': 'GVtZv1-HMgC0wiE70BjLw-P3yb',
+        'HOST': 'ec2-54-83-204-85.compute-1.amazonaws.com',
+        'PORT': '5432',
+
     }
 }
 
+import sys
+if 'test' in sys.argv:
+    DATABASES['default'] = {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+    }
+
+
 # Internationalization
-# https://docs.djangoproject.com/en/1.6/topics/i18n/
 
 LANGUAGE_CODE = 'es-ar'
 
@@ -77,7 +78,6 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/1.6/howto/static-files/
 
 STATIC_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'static_root')
 STATIC_URL = '/static/'
@@ -86,7 +86,14 @@ STATICFILES_DIRS = (
     os.path.join(SETTINGS_PATH, 'static'),
 )
 
-MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media_root')
+STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
+
+if DEBUG:
+    import tempfile
+    MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'media_root')
+else:
+    MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media_root')
+
 MEDIA_URL = '/media/'
 
 TEMPLATE_DIRS = (
@@ -100,9 +107,7 @@ SUMMERNOTE_CONFIG = {
     'lang': 'es-ES',
 }
 
-STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
-
-ADMINS = (('Agustin', 'agukrapo@gmail.com'), )
+ADMINS = (('agu', 'agukrapo@gmail.com'), )
 
 LOGGING = {
     'version': 1,

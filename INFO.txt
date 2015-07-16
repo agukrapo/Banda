@@ -10,6 +10,7 @@ TODO
 ----------
 !Fonts
 
+heroku db & s3 storage
 contacto h1
 volver de album a musica sin loader
 canciones many to many widget in admin
