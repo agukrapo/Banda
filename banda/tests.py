@@ -10,9 +10,17 @@ from datetime import datetime
 
 from django.core.files.uploadedfile import SimpleUploadedFile
 
+from os.path import exists
+
 
 def faketoday():
     return datetime(2012, 11, 3)
+
+
+class FakeDatetime(datetime):
+    @classmethod
+    def now(cls):
+        return faketoday()
 
 
 class BaseTestCase(TestCase):
@@ -148,22 +156,25 @@ class ComentarioTestCase(BaseTestCase):
 
 
 class FotosTestCase(BaseTestCase):
+    @mock.patch('django.db.models.fields.timezone.now', faketoday)
+    @mock.patch('django.db.models.fields.files.datetime.datetime', FakeDatetime)
     def setUp(self):
         super(FotosTestCase, self).setUp()
         Foto.objects.create(nombre='nombre field',
-                            fecha='2015-07-14 12:30',
                             imagen=SimpleUploadedFile(name='foo.gif', content=b'GIF87a\x01\x00\x01\x00\x80\x01\x00\x00\x00\x00ccc,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00'))
 
     def test_fotos(self):
         response = self.client.get('/banda/fotos/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"current": 1, "total": 1, "elements": [{"url": "/media/img/2015/07/16/foo.gif", "fecha": "16 de Julio de 2015, 16:40 hs.", "height": 1, "width": 1, "nombre": "nombre field", "thumbnail": "/media/cache/51/eb/51eba885d5891726d6480a302c228eb3.jpg"}]}')
+        self.assertEqual(response.content, '{"current": 1, "total": 1, "elements": [{"url": "/media/img/2012/11/03/foo.gif", "fecha": "03 de Noviembre de 2012, 00:00 hs.", "height": 1, "width": 1, "nombre": "nombre field", "thumbnail": "/media/cache/da/68/da68810b27df3a03ee90de82aab8e8e1.jpg"}]}')
 
     @classmethod
     def tearDownClass(self):
-        import shutil
-        shutil.rmtree(settings.MEDIA_ROOT)
+        if exists(settings.MEDIA_ROOT):
+            import shutil
+            shutil.rmtree(settings.MEDIA_ROOT)
+
         super(FotosTestCase, self).tearDownClass()
 
 
