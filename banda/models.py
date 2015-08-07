@@ -31,7 +31,6 @@ def time_to_string(time):
 class Cancion(models.Model):
     nombre = models.CharField(max_length=100)
     url = models.URLField(blank=True, help_text='Soundcloud')
-    #duracion = models.TimeField()
 
     def __unicode__(self):
         return self.nombre
@@ -70,6 +69,7 @@ class Album(models.Model):
             'descripcion': self.descripcion,
             'thumbnail': get_thumbnail(self.tapa, '480x360', crop='center', quality=80).url,
         }
+
 
 class Presentacion(models.Model):
     lugar = models.CharField(max_length=500)

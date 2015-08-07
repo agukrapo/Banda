@@ -58,6 +58,37 @@ class FondosTestCase(BaseTestCase):
         self.assertEqual(response.content, '{"nosotros": "/media/img/fondos/nosotros", "musica": "/media/img/fondos/musica", "contacto": "/media/img/fondos/contacto", "videos": "/media/img/fondos/videos", "inicio": "/media/img/fondos/inicio", "logo": "/media/img/fondos/logo", "fotos": "/media/img/fondos/fotos", "muro": "/media/img/fondos/muro", "presentaciones": "/media/img/fondos/presentaciones"}')
 
 
+class EmptyFondosTestCase(BaseTestCase):
+    def setUp(self):
+        super(EmptyFondosTestCase, self).setUp()
+
+    def test_fondos(self):
+        response = self.client.get('/banda/fondos/')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, '{}')
+
+
+class SeccionesTestCase(BaseTestCase):
+    def setUp(self):
+        super(SeccionesTestCase, self).setUp()
+
+    def test_secciones(self):
+        response = self.client.get('/banda/secciones/')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, '{"nosotros": true, "musica": true, "contacto": true, "videos": true, "inicio": true, "fotos": true, "muro": true, "presentaciones": true}')
+
+
+class EmptySeccionesTestCase(TestCase):
+    def test_secciones(self):
+        self.client = Client(HTTP_X_REQUESTED_WITH='XMLHttpRequest')
+        response = self.client.get('/banda/secciones/')
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, '{}')
+
+
 class MusicaTestCase(BaseTestCase):
     def setUp(self):
         super(MusicaTestCase, self).setUp()
@@ -188,14 +219,3 @@ class ContactoTestCase(BaseTestCase):
 
         self.assertEqual(response.status_code, 200)
         self.assertEqual(response.content, '{"texto": "texto field"}')
-
-
-class SeccionesTestCase(BaseTestCase):
-    def setUp(self):
-        super(SeccionesTestCase, self).setUp()
-
-    def test_secciones(self):
-        response = self.client.get('/banda/secciones/')
-
-        self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"nosotros": true, "musica": true, "contacto": true, "videos": true, "inicio": true, "fotos": true, "muro": true, "presentaciones": true}')

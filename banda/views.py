@@ -1,6 +1,6 @@
 import datetime
 from banda.json import dumps, parse
-from banda.decorators import require_AJAX, apply_restrictions_by_seccion, apply_restrictions_by_view_name
+from banda.decorators import require_ajax, apply_restrictions_by_seccion, apply_restrictions_by_view_name
 from django.http import HttpResponse, HttpResponseBadRequest, Http404
 from django.views.decorators.http import require_GET, require_POST
 from django.utils import timezone
@@ -10,18 +10,38 @@ from banda.models import Fondos, Nosotros, Presentacion, Album, Video, Comentari
 
 
 @require_GET
-@require_AJAX
+@require_ajax
+def get_fondos(request):
+    try:
+        fondos = Fondos.objects.get(pk=1)
+    except Fondos.DoesNotExist:
+        return HttpResponse('{}', content_type='application/json')
+    return HttpResponse(dumps(fondos), content_type='application/json')
+
+
+@require_GET
+@require_ajax
+def get_secciones(request):
+    try:
+        secciones = Secciones.objects.get(pk=1)
+    except Secciones.DoesNotExist:
+        return HttpResponse('{}', content_type='application/json')
+    return HttpResponse(dumps(secciones), content_type='application/json')
+
+
+@require_GET
+@require_ajax
 @apply_restrictions_by_view_name
 def get_nosotros(request):
     try:
         nosotros = Nosotros.objects.get(pk=1)
     except Nosotros.DoesNotExist:
-        nosotros = Nosotros(texto = 'Por favor inicializar base de datos')
+        nosotros = Nosotros(texto='Por favor inicializar base de datos')
     return HttpResponse(dumps(nosotros), content_type='application/json')
 
 
 @require_GET
-@require_AJAX
+@require_ajax
 @apply_restrictions_by_view_name
 def get_presentaciones(request):
     presentaciones = Presentacion.objects.all().filter(fecha__gt=timezone.now() - datetime.timedelta(hours=8))
@@ -29,7 +49,7 @@ def get_presentaciones(request):
 
 
 @require_POST
-@require_AJAX
+@require_ajax
 @apply_restrictions_by_seccion('muro')
 def save_comentario(request):
     try:
@@ -59,7 +79,7 @@ def save_comentario(request):
 
 
 @require_GET
-@require_AJAX
+@require_ajax
 @apply_restrictions_by_view_name
 def get_contacto(request):
     try:
@@ -68,15 +88,6 @@ def get_contacto(request):
         contacto = Contacto(texto = 'Por favor inicializar base de datos')
     return HttpResponse(dumps(contacto), content_type='application/json')
 
-
-@require_GET
-@require_AJAX
-def get_fondos(request):
-    try:
-        fondos = Fondos.objects.get(pk=1)
-    except Fondos.DoesNotExist:
-        raise Http404
-    return HttpResponse(dumps(fondos), content_type='application/json')
 
 def paginated_result(query_set, page_number, page_size):
     paginator = Paginator(query_set, page_size)
@@ -88,7 +99,7 @@ def paginated_result(query_set, page_number, page_size):
 
 
 @require_GET
-@require_AJAX
+@require_ajax
 @apply_restrictions_by_view_name
 def get_videos(request):
     videos = paginated_result(Video.objects.all(), request.GET.get('page', 1), request.GET.get('size', 6))
@@ -96,7 +107,7 @@ def get_videos(request):
 
 
 @require_GET
-@require_AJAX
+@require_ajax
 @apply_restrictions_by_view_name
 def get_fotos(request):
     fotos = paginated_result(Foto.objects.all(), request.GET.get('page', 1), request.GET.get('size', 8))
@@ -104,7 +115,7 @@ def get_fotos(request):
 
 
 @require_GET
-@require_AJAX
+@require_ajax
 @apply_restrictions_by_view_name
 def get_muro(request):
     muro = paginated_result(Comentario.objects.all(), request.GET.get('page', 1), request.GET.get('size', 10))
@@ -112,18 +123,9 @@ def get_muro(request):
 
 
 @require_GET
-@require_AJAX
+@require_ajax
 @apply_restrictions_by_view_name
 def get_musica(request):
     musica = paginated_result(Album.objects.all(), request.GET.get('page', 1), request.GET.get('size', 4))
     return HttpResponse(dumps(musica), content_type='application/json')
 
-
-@require_GET
-@require_AJAX
-def get_secciones(request):
-    try:
-        secciones = Secciones.objects.get(pk=1)
-    except Secciones.DoesNotExist:
-        raise Http404
-    return HttpResponse(dumps(secciones), content_type='application/json')

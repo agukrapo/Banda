@@ -1,5 +1,5 @@
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-import os
+import os, sys
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 
@@ -9,8 +9,9 @@ SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '\$`,$x9?HVY=]cC}_]4q\ym_JvRUuK+kBuY2<8@t"MKhv.%G^:l$?Cvj?s;7J);oxg!ga$2Aj\'Zz9PPwlF<^{eM*1$5qo8-74]~7'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# SECURITY
+# WARNING: don't run with debug turned on in production!
+DEBUG = False
 
 TEMPLATE_DEBUG = False
 
@@ -25,16 +26,19 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'singleton_models',
     'sorl.thumbnail',
+    'django_summernote',
     'banda',
 )
 
 MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.auth.middleware.SessionAuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    #'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'django.middleware.security.SecurityMiddleware',
 )
 
 ROOT_URLCONF = 'paginabanda.urls'
@@ -56,7 +60,6 @@ DATABASES = {
     }
 }
 
-import sys
 if 'test' in sys.argv:
     DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -88,7 +91,7 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-if DEBUG:
+if 'test' in sys.argv:
     import tempfile
     MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'media_root')
 else:
@@ -100,7 +103,6 @@ TEMPLATE_DIRS = (
     os.path.join(SETTINGS_PATH, 'html'),
 )
 
-INSTALLED_APPS += ('django_summernote', )
 SUMMERNOTE_CONFIG = {
     'width': '100%',
     'height': '500',
@@ -146,3 +148,9 @@ LOGGING = {
     },
 }
 
+X_FRAME_OPTIONS = 'DENY'
+CSRF_COOKIE_SECURE = True
+CSRF_COOKIE_HTTPONLY = True
+SECURE_BROWSER_XSS_FILTER = True
+SECURE_CONTENT_TYPE_NOSNIFF = True
+SESSION_COOKIE_SECURE = True

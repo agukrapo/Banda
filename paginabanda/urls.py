@@ -3,6 +3,7 @@ from django.conf.urls.static import static
 from django.conf import settings
 from django.views.generic import TemplateView
 from django.contrib import admin
+from paginabanda.media import media
 
 admin.autodiscover()
 
@@ -15,4 +16,4 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
     url(r'^summernote/', include('django_summernote.urls')),
 
-) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+) + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT) + media(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
