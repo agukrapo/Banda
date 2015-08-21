@@ -16,25 +16,25 @@ define([ 'jquery',
     setup: function() {
       this.$el.find('a').each($.proxy(this.each, this)).click($.proxy(this.click, this));
     },
-    isTransitioning: function() {
-      return $('body').attr('transitioningTo') !== undefined;
-    },
     getSection: function(a) {
       return $(a).attr('href').replace('#', '');
     },
     each: function(i, a) {
       if (!secciones.get(this.getSection(a))) {
-        $(this).parent().remove();
+        $(a).parent().remove();
       }
     },
     click: function(clickEvent) {
-      if (!this.isTransitioning()) {
+      if(!this.isActive(clickEvent.currentTarget)) {
         var section = this.getSection(clickEvent.currentTarget);
         require(['router'], function (router) {
           router.navigate(section, { trigger: true });
         });
       }
       clickEvent.preventDefault();
+    },
+    isActive: function(a) {
+      return $(a).parent().hasClass('active');
     },
     setActive: function(section) {
       this.$el.find('li').removeClass('active');
