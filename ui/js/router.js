@@ -8,7 +8,7 @@ define([ 'jquery',
        ], function($, backstretch, _, Backbone, Loader, fondos, secciones) {
 
   var Router = Backbone.Router.extend({
-    baseTitle: 'basettitle | ',
+    baseTitle: 'Jota | ',
     routes: {
       '': 'inicio',
       'inicio': 'inicio',
@@ -45,17 +45,17 @@ define([ 'jquery',
     fotos: function() {
       this.common('fotos');
     },
-    common: function(name) {
+    common: function(section) {
       if (!secciones.get('inicio')) {
         window.location = /maintenance/;
       } else {
-        if (secciones.get(name)) {
-          document.title = this.baseTitle + name;
-          Loader.show(2);
-          require(['views/' + name + 'view'], function (view) {
+        if (secciones.get(section)) {
+          this.setTitle(section);
+          Loader.show(section);
+          require(['views/' + section + 'view'], function (view) {
             view.refresh(); 
           });
-          this.transitionTo(name);
+          this.transitionTo(section);
           setTimeout(Loader.hide, 300);
         } else {
           this.inicio();
@@ -84,8 +84,10 @@ define([ 'jquery',
         $(':backstretch').data('backstretch') && $(':backstretch').data('backstretch').destroy();
         Loader.hide();
       }
+    },
+    setTitle: function(section) {
+      document.title = this.baseTitle + section;
     }
-    
   });
   
   return new Router();

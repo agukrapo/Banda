@@ -44,3 +44,4 @@ pip-log.txt
  
 # MacOSX
 .DS_Store
+/static_root/
