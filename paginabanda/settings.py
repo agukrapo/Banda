@@ -9,9 +9,9 @@ SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '\$`,$x9?HVY=]cC}_]4q\ym_JvRUuK+kBuY2<8@t"MKhv.%G^:l$?Cvj?s;7J);oxg!ga$2Aj\'Zz9PPwlF<^{eM*1$5qo8-74]~7'
 
-# SECURITY
-# WARNING: don't run with debug turned on in production!
-DEBUG = False
+#DEBUG = False
+DEBUG = (sys.argv[1] == 'runserver')
+
 
 TEMPLATE_DEBUG = False
 
@@ -148,7 +148,7 @@ LOGGING = {
     },
 }
 
-X_FRAME_OPTIONS = 'DENY'
+#X_FRAME_OPTIONS = 'DENY' summertnote won't work
 #CSRF_COOKIE_SECURE = True
 #CSRF_COOKIE_HTTPONLY = True
 SECURE_BROWSER_XSS_FILTER = True

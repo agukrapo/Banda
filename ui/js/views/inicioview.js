@@ -7,8 +7,7 @@ define(['jquery',
   var Inicio = BaseView.extend({
     template: _.template(template),
     actualRender : function() {
-      this.$el.html(this.template())
-      $('#logo').attr('src', fondos.get('logo'));
+      this.$el.html(this.template({ logoSrc: fondos.get('logo'), _: _ }));
     }
   });
   
