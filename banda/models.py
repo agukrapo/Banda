@@ -148,13 +148,21 @@ class Fondos(SingletonModel):
 
 class Secciones(SingletonModel):
     inicio_habilitado = models.BooleanField(default=True)
+    inicio_label = models.CharField(max_length=100, default='inicio')
     nosotros_habilitado = models.BooleanField(default=False)
+    nosotros_label = models.CharField(max_length=100, default='nosotros')
     musica_habilitado = models.BooleanField(default=False)
+    musica_label = models.CharField(max_length=100, default='musica')
     videos_habilitado = models.BooleanField(default=False)
+    videos_label = models.CharField(max_length=100, default='videos')
     fotos_habilitado = models.BooleanField(default=False)
+    fotos_label = models.CharField(max_length=100, default='fotos')
     muro_habilitado = models.BooleanField(default=False)
+    muro_label = models.CharField(max_length=100, default='muro')
     presentaciones_habilitado = models.BooleanField(default=False)
+    presentaciones_label = models.CharField(max_length=100, default='presentaciones')
     contacto_habilitado = models.BooleanField(default=False)
+    contacto_label = models.CharField(max_length=100, default='contacto')
 
     class Meta:
         verbose_name = "Secciones"
@@ -163,13 +171,21 @@ class Secciones(SingletonModel):
     def serialize(self):
         return {
             'inicio': self.inicio_habilitado,
+            'inicioLabel': self.inicio_label,
             'nosotros': self.nosotros_habilitado,
+            'nosotrosLabel': self.nosotros_label,
             'musica': self.musica_habilitado,
+            'musicaLabel': self.musica_label,
             'videos': self.videos_habilitado,
+            'videosLabel': self.videos_label,
             'fotos': self.fotos_habilitado,
+            'fotosLabel': self.fotos_label,
             'muro': self.muro_habilitado,
+            'muroLabel': self.muro_label,
             'presentaciones': self.presentaciones_habilitado,
+            'presentacionesLabel': self.presentaciones_label,
             'contacto': self.contacto_habilitado,
+            'contactoLabel': self.contacto_label,
         }
 
 

@@ -20,8 +20,12 @@ define([ 'jquery',
       return $(a).attr('href').replace('#', '');
     },
     each: function(i, a) {
-      if (!secciones.get(this.getSection(a))) {
+      var seccion = this.getSection(a);
+      if (!secciones.get(seccion)) {
         $(a).parent().remove();
+      } else {
+        console.log(seccion + 'Label', secciones.get(seccion + 'Label'));
+        $(a).html(secciones.get(seccion + 'Label'));
       }
     },
     click: function(clickEvent) {
