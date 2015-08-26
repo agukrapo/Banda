@@ -1,0 +1,10 @@
+Access Key ID: AKIAJLAPUJEHACPCBSRQ
+Secret Access Key: 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
+
+User ARN: arn:aws:iam::136101916475:user/banda
+
+=============================================
+pic
+
+jotafigueroa
+poiuytrewq
