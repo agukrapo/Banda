@@ -28,6 +28,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'django_summernote',
     'banda',
+    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -91,13 +92,6 @@ STATICFILES_DIRS = (
 
 STATICFILES_STORAGE = 'whitenoise.django.GzipManifestStaticFilesStorage'
 
-if 'test' in sys.argv:
-    import tempfile
-    MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'media_root')
-else:
-    MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media_root')
-
-MEDIA_URL = '/media/'
 
 TEMPLATE_DIRS = (
     os.path.join(SETTINGS_PATH, 'html'),
@@ -154,3 +148,29 @@ LOGGING = {
 SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 #SESSION_COOKIE_SECURE = True
+
+
+AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
+    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
+    'Cache-Control': 'max-age=94608000',
+}
+
+AWS_STORAGE_BUCKET_NAME = 'banda-ak'
+AWS_ACCESS_KEY_ID = 'AKIAJLAPUJEHACPCBSRQ'
+AWS_SECRET_ACCESS_KEY = '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'
+
+AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
+
+STATIC_FILES_LOCATION = 'static'
+
+MEDIA_FILES_LOCATION = 'media'
+
+if 'test' in sys.argv:
+    import tempfile
+    MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'media_root')
+    MEDIA_URL = '/media/'
+
+else:
+#    MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media_root')
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIA_FILES_LOCATION)
+    DEFAULT_FILE_STORAGE = 'banda.custom_storages.MediaStorage'

@@ -77,7 +77,7 @@ class SeccionesTestCase(BaseTestCase):
         response = self.client.get('/banda/secciones/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"nosotros": true, "musica": true, "contacto": true, "videos": true, "inicio": true, "fotos": true, "muro": true, "presentaciones": true}')
+        self.assertEqual(response.content, '{"contactoLabel": "contacto", "videosLabel": "videos", "fotosLabel": "fotos", "fotos": true, "contacto": true, "videos": true, "muro": true, "presentacionesLabel": "presentaciones", "muroLabel": "muro", "nosotrosLabel": "nosotros", "inicioLabel": "inicio", "nosotros": true, "musica": true, "inicio": true, "presentaciones": true, "musicaLabel": "musica"}')
 
 
 class EmptySeccionesTestCase(TestCase):
