@@ -118,7 +118,7 @@ class Foto(models.Model):
 
 
 class Fondos(SingletonModel):
-    logo = models.ImageField(upload_to='img/fondos')
+    logo = models.ImageField(upload_to='img/fondos', blank=True)
     inicio = models.ImageField(upload_to='img/fondos', blank=True)
     nosotros = models.ImageField(upload_to='img/fondos', blank=True)
     musica = models.ImageField(upload_to='img/fondos', blank=True)
@@ -134,7 +134,7 @@ class Fondos(SingletonModel):
 
     def serialize(self):
         return {
-            'logo': self.logo.url,
+            'logo': self.logo.url if self.logo else None,
             'inicio': self.inicio.url if self.inicio else None,
             'nosotros': self.nosotros.url if self.nosotros else None,
             'musica': self.musica.url if self.musica else None,
