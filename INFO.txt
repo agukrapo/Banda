@@ -1,7 +1,5 @@
 http://sqlitestudio.pl/
 
-http://dimsemenov.com/plugins/magnific-popup/
-
 http://www.hostinger.se/
 
 https://developers.google.com/speed/pagespeed/
@@ -9,10 +7,6 @@ https://developers.google.com/speed/pagespeed/
 TODO
 ----------
 !Fonts
-
-logo data-echo
-hide navigation when only inicio
-title seccione label
 
 contacto h1
 volver de album a musica sin loader

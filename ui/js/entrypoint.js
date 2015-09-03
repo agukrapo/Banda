@@ -6,6 +6,10 @@ String.prototype.contains = function(fragment) {
   return this.search(fragment) != -1;
 }
 
+String.prototype.endsWith = function(suffix) {
+    return this.indexOf(suffix, this.length - suffix.length) !== -1;
+};
+
 require.config({
   paths : {
     jquery : '//ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min',

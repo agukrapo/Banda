@@ -10,8 +10,12 @@ define([ 'jquery',
     el: '#page-header',
     template: _.template(template),
     render: function() {
-      this.$el.html(this.template());
-      this.setup();
+      if (secciones.moreThanInicioEnabled()) {
+        this.$el.html(this.template());
+        this.setup();
+      } else {
+        this.$el.remove();
+      }
     },
     setup: function() {
       this.$el.find('a').each($.proxy(this.each, this)).click($.proxy(this.click, this));
@@ -24,7 +28,6 @@ define([ 'jquery',
       if (!secciones.get(seccion)) {
         $(a).parent().remove();
       } else {
-        console.log(seccion + 'Label', secciones.get(seccion + 'Label'));
         $(a).html(secciones.get(seccion + 'Label'));
       }
     },

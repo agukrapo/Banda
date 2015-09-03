@@ -86,7 +86,7 @@ define([ 'jquery',
       }
     },
     setTitle: function(section) {
-      document.title = this.baseTitle + section;
+      document.title = this.baseTitle + secciones.get(section + 'Label');
     }
   });
   
