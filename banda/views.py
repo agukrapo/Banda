@@ -6,7 +6,7 @@ from django.views.decorators.http import require_GET, require_POST
 from django.utils import timezone
 from django.core.exceptions import ValidationError
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
-from banda.models import Fondos, Nosotros, Presentacion, Album, Video, Comentario, Foto, Contacto, Secciones
+from banda.models import Fondos, Nosotros, Presentacion, Album, Video, Comentario, Imagen, Galeria, Contacto, Secciones
 
 
 @require_GET
@@ -85,7 +85,7 @@ def get_contacto(request):
     try:
         contacto = Contacto.objects.get(pk=1)
     except Contacto.DoesNotExist:
-        contacto = Contacto(texto = 'Por favor inicializar base de datos')
+        contacto = Contacto(texto='Por favor inicializar base de datos')
     return HttpResponse(dumps(contacto), content_type='application/json')
 
 
@@ -110,7 +110,12 @@ def get_videos(request):
 @require_ajax
 @apply_restrictions_by_view_name
 def get_fotos(request):
-    fotos = paginated_result(Foto.objects.all(), request.GET.get('page', 1), request.GET.get('size', 8))
+    try:
+        imagenes = Galeria.objects.get(nombre=Galeria.FOTOS).imagenes.all()
+    except Galeria.DoesNotExist:
+        imagenes = ()
+
+    fotos = paginated_result(imagenes, request.GET.get('page', 1), request.GET.get('size', 8))
     return HttpResponse(dumps(fotos), content_type='application/json')
 
 
@@ -129,3 +134,14 @@ def get_musica(request):
     musica = paginated_result(Album.objects.all(), request.GET.get('page', 1), request.GET.get('size', 4))
     return HttpResponse(dumps(musica), content_type='application/json')
 
+
+@require_GET
+@require_ajax
+def get_galeria(request):
+    try:
+        imagenes = Galeria.objects.get(nombre=request.GET.get('nombre')).imagenes.all()
+    except Galeria.DoesNotExist:
+        raise Http404
+
+    fotos = paginated_result(imagenes, request.GET.get('page', 1), request.GET.get('size', 8))
+    return HttpResponse(dumps(fotos), content_type='application/json')

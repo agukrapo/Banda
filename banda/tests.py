@@ -2,7 +2,7 @@ import mock
 
 from django.test import TestCase, Client
 
-from banda.models import Secciones, Fondos, Album, Cancion, Video, Nosotros, Presentacion, Comentario, Foto, Contacto
+from banda.models import Secciones, Fondos, Album, Cancion, Video, Nosotros, Presentacion, Comentario, Imagen, Galeria, Contacto
 
 from paginabanda import settings
 
@@ -191,8 +191,11 @@ class FotosTestCase(BaseTestCase):
     @mock.patch('django.db.models.fields.files.datetime.datetime', FakeDatetime)
     def setUp(self):
         super(FotosTestCase, self).setUp()
-        Foto.objects.create(nombre='nombre field',
-                            imagen=SimpleUploadedFile(name='foo.gif', content=b'GIF87a\x01\x00\x01\x00\x80\x01\x00\x00\x00\x00ccc,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00'))
+        imagen = Imagen.objects.create(nombre='nombre field',
+                                       imagen=SimpleUploadedFile(name='foo.gif', content=b'GIF87a\x01\x00\x01\x00\x80\x01\x00\x00\x00\x00ccc,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00'))
+
+        galeria = Galeria.objects.create(nombre=Galeria.FOTOS)
+        galeria.imagenes.add(imagen)
 
     def test_fotos(self):
         response = self.client.get('/banda/fotos/')
@@ -201,12 +204,38 @@ class FotosTestCase(BaseTestCase):
         self.assertEqual(response.content, '{"current": 1, "total": 1, "elements": [{"url": "/media/img/2012/11/03/foo.gif", "fecha": "03 de Noviembre de 2012, 00:00 hs.", "height": 1, "width": 1, "nombre": "nombre field", "thumbnail": "/media/cache/da/68/da68810b27df3a03ee90de82aab8e8e1.jpg"}]}')
 
     @classmethod
-    def tearDownClass(self):
+    def tearDownClass(cls):
         if exists(settings.MEDIA_ROOT):
             import shutil
             shutil.rmtree(settings.MEDIA_ROOT)
 
-        super(FotosTestCase, self).tearDownClass()
+        super(FotosTestCase, cls).tearDownClass()
+
+
+class GaleriaTestCase(BaseTestCase):
+    @mock.patch('django.db.models.fields.timezone.now', faketoday)
+    @mock.patch('django.db.models.fields.files.datetime.datetime', FakeDatetime)
+    def setUp(self):
+        super(GaleriaTestCase, self).setUp()
+        imagen = Imagen.objects.create(nombre='nombre de imagen',
+                                       imagen=SimpleUploadedFile(name='imagen.gif', content=b'GIF87a\x01\x00\x01\x00\x80\x01\x00\x00\x00\x00ccc,\x00\x00\x00\x00\x01\x00\x01\x00\x00\x02\x02D\x01\x00'))
+
+        galeria = Galeria.objects.create(nombre='custom')
+        galeria.imagenes.add(imagen)
+
+    def test_(self):
+        response = self.client.get('/banda/galeria/', {'nombre': 'custom'})
+
+        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.content, '{"current": 1, "total": 1, "elements": [{"url": "/media/img/2012/11/03/imagen.gif", "fecha": "03 de Noviembre de 2012, 00:00 hs.", "height": 1, "width": 1, "nombre": "nombre de imagen", "thumbnail": "/media/cache/82/ba/82ba36a6e57b0c57467b8e31cca863ac.jpg"}]}')
+
+    @classmethod
+    def tearDownClass(cls):
+        if exists(settings.MEDIA_ROOT):
+            import shutil
+            shutil.rmtree(settings.MEDIA_ROOT)
+
+        super(GaleriaTestCase, cls).tearDownClass()
 
 
 class ContactoTestCase(BaseTestCase):

@@ -11,4 +11,5 @@ urlpatterns = patterns('',
     url(r'^fotos/$', 'banda.views.get_fotos'),
     url(r'^contacto/$', 'banda.views.get_contacto'),
     url(r'^secciones/$', 'banda.views.get_secciones'),
+    url(r'^galeria/$', 'banda.views.get_galeria'),
 )

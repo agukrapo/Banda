@@ -95,7 +95,7 @@ class Presentacion(models.Model):
         }
 
 
-class Foto(models.Model):
+class Imagen(models.Model):
     nombre = models.CharField(max_length=100)
     imagen = ImageField(upload_to='img/%Y/%m/%d')
     fecha = models.DateTimeField(auto_now_add=True)
@@ -115,6 +115,19 @@ class Foto(models.Model):
             'thumbnail': get_thumbnail(self.imagen, '253x200', crop='center', quality=80).url,
             'nombre': self.nombre,
         }
+
+
+class Galeria(models.Model):
+    FOTOS = 'FOTOS'
+    ARTE_DE_TAPA = 'ARTE_DE_TAPA'
+
+    NOMBRES = (
+        FOTOS,
+        ARTE_DE_TAPA,
+    )
+
+    nombre = models.CharField(max_length=100, choices=NOMBRES, unique=True)
+    imagenes = models.ManyToManyField(Imagen)
 
 
 class Fondos(SingletonModel):
