@@ -1,11 +1,3 @@
-http://sqlitestudio.pl/
-
-http://www.hostinger.se/
-
-https://developers.google.com/speed/pagespeed/
-============================
-TODO
-----------
 !Fonts
 
 contacto h1
