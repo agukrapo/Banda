@@ -105,6 +105,7 @@ class Imagen(models.Model):
 
     class Meta:
         ordering = ('-fecha',)
+        verbose_name_plural = "Imagenes"
 
     def serialize(self):
         return {
@@ -122,8 +123,8 @@ class Galeria(models.Model):
     ARTE_DE_TAPA = 'ARTE_DE_TAPA'
 
     NOMBRES = (
-        FOTOS,
-        ARTE_DE_TAPA,
+        (FOTOS, 'Fotos'),
+        (ARTE_DE_TAPA, 'Arte de Tapa'),
     )
 
     nombre = models.CharField(max_length=100, choices=NOMBRES, unique=True)
