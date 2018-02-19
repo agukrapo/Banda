@@ -51,24 +51,10 @@ WSGI_APPLICATION = 'paginabanda.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd8ov7sijd7dcn0',
-        'USER': 'jhuusaxauuxznt',
-        'PASSWORD': 'GVtZv1-HMgC0wiE70BjLw-P3yb',
-        'HOST': 'ec2-54-83-204-85.compute-1.amazonaws.com',
-        'PORT': '5432',
-
-    }
-}
-
-if 'test' in sys.argv:
-    DATABASES['default'] = {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
-
-
-# Internationalization
+}
 
 LANGUAGE_CODE = 'es-ar'
 
@@ -109,36 +95,17 @@ LOGGING = {
     'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
-        #'mail_admins': {
-        #    'class': 'django.utils.log.AdminEmailHandler',
-        #    'level': 'ERROR',
-        #    'include_html': True,
-        #},
-        # Log to a text file that can be rotated by logrotate
         'logfile': {
             'class': 'logging.handlers.WatchedFileHandler',
             'filename': os.path.join(BASE_DIR, 'server.log')
         },
     },
     'loggers': {
-        # Again, default Django configuration to email unhandled exceptions
-        #'django.request': {
-        #     'handlers': ['mail_admins'],
-        #    'level': 'ERROR',
-        #    'propagate': True,
-        #},
-        # Might as well log any errors anywhere else in Django
         'django': {
             'handlers': ['logfile'],
             'level': 'ERROR',
             'propagate': False,
         },
-        # Your own app - this assumes all your logger names start with "myapp."
-        #'myapp': {
-        #    'handlers': ['logfile'],
-        #    'level': 'WARNING', # Or maybe INFO or DEBUG
-        #    'propagate': False
-        #},
     },
 }
 
@@ -149,28 +116,10 @@ SECURE_BROWSER_XSS_FILTER = True
 SECURE_CONTENT_TYPE_NOSNIFF = True
 #SESSION_COOKIE_SECURE = True
 
-
-AWS_HEADERS = {  # see http://developer.yahoo.com/performance/rules.html#expires
-    'Expires': 'Thu, 31 Dec 2099 20:00:00 GMT',
-    'Cache-Control': 'max-age=94608000',
-}
-
-AWS_STORAGE_BUCKET_NAME = 'banda-ak'
-AWS_ACCESS_KEY_ID = 'AKIAJLAPUJEHACPCBSRQ'
-AWS_SECRET_ACCESS_KEY = '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'
-
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-
 STATIC_FILES_LOCATION = 'static'
 
 MEDIA_FILES_LOCATION = 'media'
 
-if 'test' in sys.argv:
-    import tempfile
-    MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'media_root')
-    MEDIA_URL = '/media/'
-
-else:
-#    MEDIA_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'media_root')
-    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIA_FILES_LOCATION)
-    DEFAULT_FILE_STORAGE = 'banda.custom_storages.MediaStorage'
+import tempfile
+MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'media_root')
+MEDIA_URL = '/media/'
