@@ -8,7 +8,7 @@ define([ 'jquery',
        ], function($, backstretch, _, Backbone, Loader, fondos, secciones) {
 
   var Router = Backbone.Router.extend({
-    baseTitle: 'Jota | ',
+    baseTitle: 'Banda | ',
     routes: {
       '': 'inicio',
       'inicio': 'inicio',

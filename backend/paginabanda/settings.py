@@ -28,7 +28,7 @@ INSTALLED_APPS = (
     'sorl.thumbnail',
     'django_summernote',
     'banda',
-    'storages',
+#    'storages',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -121,5 +121,5 @@ STATIC_FILES_LOCATION = 'static'
 MEDIA_FILES_LOCATION = 'media'
 
 import tempfile
-MEDIA_ROOT = os.path.join(tempfile.gettempdir(), 'media_root')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_root')
 MEDIA_URL = '/media/'

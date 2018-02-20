@@ -1,6 +1,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
-var minifyCss = require('gulp-minify-css');
+var cleanCss = require('gulp-clean-css');
 var rename = require('gulp-rename');
 var concat = require('gulp-concat');
 var del = require('del');
@@ -11,8 +11,8 @@ var config = {
     jsSrc: './js',
     jsDist: './dist/js',
     cssDist: './dist/css',
-    jsStaticDest: '../paginabanda/static/js',
-    cssStaticDest: '../paginabanda/static/css',
+    jsStaticDest: '../backend/paginabanda/static/js',
+    cssStaticDest: '../backend/paginabanda/static/css',
 }
 
 gulp.task('clean', function (callBack) {
@@ -24,11 +24,17 @@ gulp.task('clean', function (callBack) {
   ], {force: true} , callBack);
 });
 
-gulp.task('css', ['clean'], function() {
-  gulp.src('./scss/main.scss')
-    .pipe(sass())
+/*gulp.task('sass', function () {
+  return gulp.src('./scss/main.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(config.cssDist));
+});*/
+
+gulp.task('sass', function() {
+  return gulp.src('./scss/main.scss')
+    .pipe(sass().on('error', sass.logError))
     .pipe(gulp.dest(config.cssDist))
-    .pipe(minifyCss())
+    .pipe(cleanCss())
     .pipe(rename('main.min.css'))
     .pipe(gulp.dest(config.cssStaticDest));
 });
@@ -57,5 +63,6 @@ gulp.task('copyjs', ['requirejs'], function() {
   
 });
 
+gulp.task('css', ['clean', 'sass']);
 gulp.task('js', ['clean', 'requirejs', 'copyjs']);
-gulp.task('default', ['clean', 'css', 'js']);
+gulp.task('default', ['clean', 'sass', 'js']);
