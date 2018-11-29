@@ -8,9 +8,10 @@ from pytz import timezone
 from sorl.thumbnail import ImageField
 from sorl.thumbnail.shortcuts import get_thumbnail
 
-DATE_FORMAT = "d \d\e F \d\e Y"
-TIME_FORMAT = "%H:%M hs."
-DATETIME_FORMAT = "d \d\e F \d\e Y, H:i \h\s."
+
+DATE_FORMAT = r'd \d\e F \d\e Y'
+TIME_FORMAT = '%H:%M hs.'
+DATETIME_FORMAT = r'd \d\e F \d\e Y, H:i \h\s.'
 
 
 def date_to_string(date):
@@ -174,7 +175,8 @@ class Secciones(SingletonModel):
     muro_habilitado = models.BooleanField(default=False)
     muro_label = models.CharField(max_length=100, default='muro')
     presentaciones_habilitado = models.BooleanField(default=False)
-    presentaciones_label = models.CharField(max_length=100, default='presentaciones')
+    presentaciones_label = models.CharField(
+        max_length=100, default='presentaciones')
     contacto_habilitado = models.BooleanField(default=False)
     contacto_label = models.CharField(max_length=100, default='contacto')
 

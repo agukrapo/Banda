@@ -1,20 +1,15 @@
 import mock
-
 from django.test import TestCase, Client
-
 from banda.models import Secciones, Fondos, Album, Cancion, Video, Nosotros, Presentacion, Comentario, Imagen, Galeria, Contacto
-
 from paginabanda import settings
-
 from datetime import datetime
-
 from django.core.files.uploadedfile import SimpleUploadedFile
-
 from os.path import exists
+from django.utils import timezone
 
 
 def faketoday():
-    return datetime(2012, 11, 3)
+    return timezone.make_aware(datetime(2012, 11, 3))
 
 
 class FakeDatetime(datetime):
@@ -55,7 +50,15 @@ class FondosTestCase(BaseTestCase):
         response = self.client.get('/banda/fondos/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"nosotros": "/media/img/fondos/nosotros", "musica": "/media/img/fondos/musica", "contacto": "/media/img/fondos/contacto", "videos": "/media/img/fondos/videos", "inicio": "/media/img/fondos/inicio", "logo": "/media/img/fondos/logo", "fotos": "/media/img/fondos/fotos", "muro": "/media/img/fondos/muro", "presentaciones": "/media/img/fondos/presentaciones"}')
+        self.assertJSONEqual(response.content, {'nosotros': '/media/img/fondos/nosotros',
+                                                'musica': '/media/img/fondos/musica',
+                                                'contacto': '/media/img/fondos/contacto',
+                                                'videos': '/media/img/fondos/videos',
+                                                'inicio': '/media/img/fondos/inicio',
+                                                'logo': '/media/img/fondos/logo',
+                                                'fotos': '/media/img/fondos/fotos',
+                                                'muro': '/media/img/fondos/muro',
+                                                'presentaciones': '/media/img/fondos/presentaciones'})
 
 
 class EmptyFondosTestCase(BaseTestCase):
@@ -66,7 +69,7 @@ class EmptyFondosTestCase(BaseTestCase):
         response = self.client.get('/banda/fondos/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{}')
+        self.assertJSONEqual(response.content, {})
 
 
 class SeccionesTestCase(BaseTestCase):
@@ -77,7 +80,22 @@ class SeccionesTestCase(BaseTestCase):
         response = self.client.get('/banda/secciones/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"contactoLabel": "contacto", "videosLabel": "videos", "fotosLabel": "fotos", "fotos": true, "contacto": true, "videos": true, "muro": true, "presentacionesLabel": "presentaciones", "muroLabel": "muro", "nosotrosLabel": "nosotros", "inicioLabel": "inicio", "nosotros": true, "musica": true, "inicio": true, "presentaciones": true, "musicaLabel": "musica"}')
+        self.assertJSONEqual(response.content, {'fotos': True,
+                                                'contacto': True,
+                                                'videos': True,
+                                                'muro': True,
+                                                'nosotros': True,
+                                                'musica': True,
+                                                'inicio': True,
+                                                'presentaciones': True,
+                                                'contactoLabel': 'contacto',
+                                                'videosLabel': 'videos',
+                                                'fotosLabel': 'fotos',
+                                                'presentacionesLabel': 'presentaciones',
+                                                'muroLabel': 'muro',
+                                                'nosotrosLabel': 'nosotros',
+                                                'inicioLabel': 'inicio',
+                                                'musicaLabel': 'musica'})
 
 
 class EmptySeccionesTestCase(TestCase):
@@ -86,14 +104,14 @@ class EmptySeccionesTestCase(TestCase):
         response = self.client.get('/banda/secciones/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{}')
+        self.assertJSONEqual(response.content, {})
 
 
 class MusicaTestCase(BaseTestCase):
     def setUp(self):
         super(MusicaTestCase, self).setUp()
 
-        cancion = Cancion.objects.create(nombre = 'cancion field')
+        cancion = Cancion.objects.create(nombre='cancion field')
 
         album = Album(nombre='descripcion field',
                       artista='descripcion field',
@@ -108,20 +126,23 @@ class MusicaTestCase(BaseTestCase):
         response = self.client.get('/banda/musica/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"current": 1, "total": 1, "elements": [{"artista": "descripcion field", "canciones": [{"url": "", "nombre": "cancion field"}], "tapa": "/media/img/tapas/tapa.png", "lanzamiento": "13 de Abril de 2015", "descripcion": "descripcion field", "nombre": "descripcion field", "thumbnail": "/media/cache/1c/79/1c79f75c3cfc37be037a2e4159f394b2.jpg"}]}')
+        self.assertJSONEqual(
+            response.content, {'current': 1, 'total': 1, 'elements': [{'artista': 'descripcion field', 'canciones': [{'url': '', 'nombre': 'cancion field'}], 'tapa': '/media/img/tapas/tapa.png', 'lanzamiento': '13 de Abril de 2015', 'descripcion': 'descripcion field', 'nombre': 'descripcion field', 'thumbnail': '/media/cache/1c/79/1c79f75c3cfc37be037a2e4159f394b2.jpg'}]})
 
 
 class VideosTestCase(BaseTestCase):
     def setUp(self):
         super(VideosTestCase, self).setUp()
 
-        Video.objects.create(nombre='nombre field', url='url field', fecha='2015/05/14')
+        Video.objects.create(nombre='nombre field',
+                             url='url field', fecha='2015/05/14')
 
     def test_fondos(self):
         response = self.client.get('/banda/videos/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"current": 1, "total": 1, "elements": [{"url": "url field", "nombre": "nombre field"}]}')
+        self.assertJSONEqual(
+            response.content, {'current': 1, 'total': 1, 'elements': [{'url': 'url field', 'nombre': 'nombre field'}]})
 
 
 class NosotrosTestCase(BaseTestCase):
@@ -134,7 +155,7 @@ class NosotrosTestCase(BaseTestCase):
         response = self.client.get('/banda/nosotros/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"texto": "texto field"}')
+        self.assertJSONEqual(response.content, {'texto': 'texto field'})
 
 
 class PresentacionesTestCase(BaseTestCase):
@@ -158,7 +179,8 @@ class PresentacionesTestCase(BaseTestCase):
         response = self.client.get('/banda/presentaciones/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '[{"lugar": "lugar 2 field", "descripcion": "descripcion 2 field", "fecha": "24 de Diciembre de 2012", "hora": "23:59 hs.", "direccion": "direccion 2 field"}]')
+        self.assertJSONEqual(
+            response.content, [{'lugar': 'lugar 2 field', 'descripcion': 'descripcion 2 field', 'fecha': '24 de Diciembre de 2012', 'hora': '23:59 hs.', 'direccion': 'direccion 2 field'}])
 
 
 class MuroTestCase(BaseTestCase):
@@ -172,7 +194,8 @@ class MuroTestCase(BaseTestCase):
         response = self.client.get('/banda/muro/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"current": 1, "total": 1, "elements": [{"autor": "autor field", "fecha": "03 de Noviembre de 2012, 00:00 hs.", "texto": "texto field"}]}')
+        self.assertJSONEqual(
+            response.content, {'current': 1, 'total': 1, 'elements': [{'autor': 'autor field', 'fecha': '03 de Noviembre de 2012, 00:00 hs.', 'texto': 'texto field'}]})
 
 
 class ComentarioTestCase(BaseTestCase):
@@ -180,10 +203,12 @@ class ComentarioTestCase(BaseTestCase):
         super(ComentarioTestCase, self).setUp()
 
     def test_(self):
-        response = self.client.post('/banda/comentario/', '{"autor": "autor field", "comentario": "comentario field"}', content_type="application/json")
+        response = self.client.post(
+            '/banda/comentario/', '{"autor": "autor field", "comentario": "comentario field"}', content_type="application/json")
 
         self.assertEqual(response.status_code, 201)
-        self.assertEqual(response.content, 'Comentario procesado correctamente')
+        self.assertEqual(response.content,
+                         b'Comentario procesado correctamente')
 
 
 class FotosTestCase(BaseTestCase):
@@ -201,7 +226,8 @@ class FotosTestCase(BaseTestCase):
         response = self.client.get('/banda/fotos/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"current": 1, "total": 1, "elements": [{"url": "/media/img/2012/11/03/foo.gif", "fecha": "03 de Noviembre de 2012, 00:00 hs.", "height": 1, "width": 1, "nombre": "nombre field", "thumbnail": "/media/cache/da/68/da68810b27df3a03ee90de82aab8e8e1.jpg"}]}')
+        self.assertJSONEqual(
+            response.content, {'current': 1, 'total': 1, 'elements': [{'url': '/media/img/2012/11/03/foo.gif', 'fecha': '03 de Noviembre de 2012, 00:00 hs.', 'height': 1, 'width': 1, 'nombre': 'nombre field', 'thumbnail': '/media/cache/da/68/da68810b27df3a03ee90de82aab8e8e1.jpg'}]})
 
     @classmethod
     def tearDownClass(cls):
@@ -227,7 +253,8 @@ class GaleriaTestCase(BaseTestCase):
         response = self.client.get('/banda/galeria/', {'nombre': 'custom'})
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"current": 1, "total": 1, "elements": [{"url": "/media/img/2012/11/03/imagen.gif", "fecha": "03 de Noviembre de 2012, 00:00 hs.", "height": 1, "width": 1, "nombre": "nombre de imagen", "thumbnail": "/media/cache/82/ba/82ba36a6e57b0c57467b8e31cca863ac.jpg"}]}')
+        self.assertJSONEqual(
+            response.content, {'current': 1, 'total': 1, 'elements': [{'url': '/media/img/2012/11/03/imagen.gif', 'fecha': '03 de Noviembre de 2012, 00:00 hs.', 'height': 1, 'width': 1, 'nombre': 'nombre de imagen', 'thumbnail': '/media/cache/82/ba/82ba36a6e57b0c57467b8e31cca863ac.jpg'}]})
 
     @classmethod
     def tearDownClass(cls):
@@ -247,4 +274,4 @@ class ContactoTestCase(BaseTestCase):
         response = self.client.get('/banda/contacto/')
 
         self.assertEqual(response.status_code, 200)
-        self.assertEqual(response.content, '{"texto": "texto field"}')
+        self.assertJSONEqual(response.content, {'texto': 'texto field'})

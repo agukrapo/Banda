@@ -1,9 +1,10 @@
 from django.db.models.base import ModelBase
+from django.utils.encoding import force_text
 try:
     import simplejson
 except ImportError:
     from django.utils import simplejson
-from django.utils.encoding import force_unicode
+
 
 def dumps(content, json_opts={}):
     """
@@ -14,8 +15,10 @@ def dumps(content, json_opts={}):
 
     return simplejson.dumps(content, **json_opts)
 
+
 def parse(raw):
     return simplejson.loads(raw)
+
 
 class LazyJSONEncoder(simplejson.JSONEncoder):
     """
@@ -24,7 +27,7 @@ class LazyJSONEncoder(simplejson.JSONEncoder):
     then this method is used, else, it attempts to serialize fields.
     """
 
-    def default(self, obj):
+    def default(self, obj):  # pylint: disable=E0202
         # This handles querysets and other iterable types
         try:
             iterable = iter(obj)
@@ -41,7 +44,7 @@ class LazyJSONEncoder(simplejson.JSONEncoder):
 
         # Other Python Types:
         try:
-            return force_unicode(obj)
+            return force_text(obj)
         except Exception:
             pass
 
@@ -49,13 +52,12 @@ class LazyJSONEncoder(simplejson.JSONEncoder):
         return super(LazyJSONEncoder, self).default(obj)
 
     def serialize_model(self, obj):
-        tmp = { }
+        tmp = {}
         many = [f.name for f in obj._meta.many_to_many]
-        for field in obj._meta.get_all_field_names( ):
+        for field in obj._meta.get_all_field_names():
             if len(many) > 0 and field in many:
                 many.remove(field)
-                tmp[field] = getattr(obj, field).all( )
+                tmp[field] = getattr(obj, field).all()
             else:
                 tmp[field] = getattr(obj, field, None)
         return tmp
-

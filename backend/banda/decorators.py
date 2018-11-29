@@ -20,7 +20,7 @@ def check_seccion(seccion):
         secciones = Secciones.objects.get(pk=1).__dict__
     except Secciones.DoesNotExist:
         return HttpResponseForbidden()
-    
+
     permission = False
     for key in secciones.keys():
         if key.startswith(seccion):
@@ -29,7 +29,7 @@ def check_seccion(seccion):
 
     if not permission:
         return HttpResponseForbidden()
-        
+
 
 def apply_restrictions_by_seccion(seccion_hablitada):
     def decorator(func):
@@ -49,7 +49,6 @@ def apply_restrictions_by_view_name(func):
         result = check_seccion(func.__name__[func.__name__.index("_")+1:])
         if result:
             return result
-        
+
         return func(request, *args, **kwargs)
     return wrap
-

@@ -2,6 +2,8 @@
 *.log
 db.sqlite3
 ENV/
+BANDA_PYTHON3_ENV/
+.vscode/
 media_root/
 dist/
 node_modules/

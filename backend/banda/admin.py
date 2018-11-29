@@ -28,6 +28,7 @@ class SeccionesAdmin(SingletonModelAdmin):
 class ComentarioAdmin(admin.ModelAdmin):
     search_fields = ['autor']
 
+
 admin.site.register(Cancion)
 admin.site.register(Album)
 admin.site.register(Presentacion)
